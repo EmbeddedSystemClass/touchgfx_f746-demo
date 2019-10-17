@@ -70,8 +70,7 @@ public:
      */
     typedef meta::TypeList< NoTransition,
             meta::TypeList< SlideTransition<WEST>,
-            meta::TypeList< SlideTransition<EAST>,
-            meta::Nil > >
+            meta::Nil >
             > GeneratedTransitionTypes;
 
     /**

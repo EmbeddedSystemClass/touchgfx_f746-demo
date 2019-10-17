@@ -58,9 +58,29 @@ TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.o: \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TypedText.hpp \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Texts.hpp \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/gui/include/gui/screen2_screen/Screen2Presenter.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/Buttons.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ClickButtonTrigger.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/AbstractButtonContainer.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/RepeatButtonTrigger.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ToggleButtonTrigger.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TouchButtonTrigger.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/BoxWithBorder.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/IconButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/Image.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ImageButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/AnimatedImageButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TextButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TiledImageButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TiledImage.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/WildcardTextButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TwoWildcardTextButtonStyle.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp
 
 C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/gui_generated/include/gui_generated/common/FrontendApplicationBase.hpp:
@@ -179,10 +199,50 @@ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/
 
 C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:
 
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:
+
 C:/TouchGFXProjects/f746g-disco-test/TouchGFX/gui/include/gui/screen2_screen/Screen2View.hpp:
 
 C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/gui_generated/include/gui_generated/screen2_screen/Screen2ViewBase.hpp:
 
 C:/TouchGFXProjects/f746g-disco-test/TouchGFX/gui/include/gui/screen2_screen/Screen2Presenter.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/Buttons.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ClickButtonTrigger.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/AbstractButtonContainer.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/RepeatButtonTrigger.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ToggleButtonTrigger.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TouchButtonTrigger.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/BoxWithBorderButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/BoxWithBorder.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/IconButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/Image.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/ImageButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/AnimatedImageButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TextButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TiledImageButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TiledImage.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/WildcardTextButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/containers/buttons/TwoWildcardTextButtonStyle.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 
 C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:

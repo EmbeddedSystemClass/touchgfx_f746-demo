@@ -3,20 +3,48 @@
 /*********************************************************************************/
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 #include "BitmapDatabase.hpp"
 
 Screen2ViewBase::Screen2ViewBase() :
-    buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler)
+    buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler),
+    flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
 {
     box1.setPosition(0, 0, 507, 311);
-    box1.setColor(touchgfx::Color::getColorFrom24BitRGB(65, 163, 28));
+    box1.setColor(touchgfx::Color::getColorFrom24BitRGB(17, 138, 120));
 
-    button1.setXY(155, 90);
-    button1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    button1.setAction(buttonCallback);
+    textArea1.setXY(352, 10);
+    textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(TypedText(T_SINGLEUSEID5));
+
+    flexButton1.setBoxWithBorderPosition(0, 0, 95, 44);
+    flexButton1.setBorderSize(0);
+    flexButton1.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(43, 127, 168), touchgfx::Color::getColorFrom24BitRGB(215, 228, 232), touchgfx::Color::getColorFrom24BitRGB(8, 131, 255), touchgfx::Color::getColorFrom24BitRGB(51, 102, 153));
+    flexButton1.setIconBitmaps(Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
+    flexButton1.setIconXY(30, 8);
+    flexButton1.setPosition(23, 215, 95, 44);
+    flexButton1.setAction(flexButtonCallback);
+
+    buttonWithLabel1.setXY(160, 70);
+    buttonWithLabel1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    buttonWithLabel1.setLabelText(TypedText(T_SINGLEUSEID6));
+    buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    buttonWithLabel1.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    buttonWithLabel1.setAction(buttonCallback);
+
+    buttonWithLabel1_send.setXY(160, 136);
+    buttonWithLabel1_send.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    buttonWithLabel1_send.setLabelText(TypedText(T_SINGLEUSEID7));
+    buttonWithLabel1_send.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    buttonWithLabel1_send.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    buttonWithLabel1_send.setAction(buttonCallback);
 
     add(box1);
-    add(button1);
+    add(textArea1);
+    add(flexButton1);
+    add(buttonWithLabel1);
+    add(buttonWithLabel1_send);
 }
 
 void Screen2ViewBase::setupScreen()
@@ -26,11 +54,29 @@ void Screen2ViewBase::setupScreen()
 
 void Screen2ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &button1)
+    if (&src == &buttonWithLabel1)
+    {
+        //Interaction2
+        //When buttonWithLabel1 clicked call virtual function
+        //Call uart_init_clicked
+        uart_init_clicked();
+    }
+    else if (&src == &buttonWithLabel1_send)
+    {
+        //Interaction3
+        //When buttonWithLabel1_send clicked call virtual function
+        //Call uart_send_clicked
+        uart_send_clicked();
+    }
+}
+
+void Screen2ViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
+{
+    if (&src == &flexButton1)
     {
         //Interaction1
-        //When button1 clicked change screen to Screen1
-        //Go to Screen1 with screen transition towards East
-        application().gotoScreen1ScreenSlideTransitionEast();
+        //When flexButton1 clicked change screen to Screen1
+        //Go to Screen1 with screen transition towards West
+        application().gotoScreen1ScreenSlideTransitionWest();
     }
 }

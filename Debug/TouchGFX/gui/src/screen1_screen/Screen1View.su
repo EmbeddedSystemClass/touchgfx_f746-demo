@@ -68,18 +68,20 @@ TextAreaWithWildcard.hpp:167:22:virtual uint16_t touchgfx::TextAreaWithOneWildca
 TextAreaWithWildcard.hpp:181:22:virtual uint16_t touchgfx::TextAreaWithOneWildcard::getType() const	16	static
 View.hpp:39:7:touchgfx::View<Screen1Presenter>::~View()	16	static
 View.hpp:39:7:virtual touchgfx::View<Screen1Presenter>::~View()	16	static
-Screen1ViewBase.hpp:19:13:Screen1ViewBase::~Screen1ViewBase()	16	static
-Screen1ViewBase.hpp:19:13:virtual Screen1ViewBase::~Screen1ViewBase()	16	static
-Screen1View.hpp:11:13:Screen1View::~Screen1View()	16	static
-Screen1View.hpp:11:13:virtual Screen1View::~Screen1View()	16	static
-Screen1View.cpp:29:6:virtual void Screen1View::initUART()	16	static
-Screen1View.cpp:47:1:Screen1View::Screen1View()	16	static
-Screen1View.cpp:52:6:virtual void Screen1View::setupScreen()	16	static
-Screen1View.cpp:57:6:virtual void Screen1View::tearDownScreen()	16	static
-Screen1View.cpp:64:6:virtual void Screen1View::button3click()	16	static
-Screen1View.cpp:73:6:virtual void Screen1View::button2click()	16	static
+Screen1ViewBase.hpp:20:13:Screen1ViewBase::~Screen1ViewBase()	16	static
+Screen1ViewBase.hpp:20:13:virtual Screen1ViewBase::~Screen1ViewBase()	16	static
+Screen1View.hpp:12:13:Screen1View::~Screen1View()	16	static
+Screen1View.hpp:12:13:virtual Screen1View::~Screen1View()	16	static
+Screen1View.cpp:5:6:virtual void Screen1View::initUART()	16	static
+Screen1View.cpp:10:1:Screen1View::Screen1View()	16	static
+Screen1View.cpp:15:6:virtual void Screen1View::setupScreen()	16	static
+Screen1View.cpp:21:6:virtual void Screen1View::tearDownScreen()	16	static
+Screen1View.cpp:29:6:virtual void Screen1View::button3click()	80	static
+Screen1View.cpp:49:6:virtual void Screen1View::button2click()	16	static
 TextAreaWithWildcard.hpp:75:7:touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	16	static
 TextAreaWithWildcard.hpp:75:7:virtual touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	16	static
+ButtonWithIcon.hpp:32:7:touchgfx::ButtonWithIcon::~ButtonWithIcon()	16	static
+ButtonWithIcon.hpp:32:7:virtual touchgfx::ButtonWithIcon::~ButtonWithIcon()	16	static
 Callback.hpp:469:8:touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButton&>::~Callback()	16	static
 Callback.hpp:469:8:virtual touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButton&>::~Callback()	16	static
 Callback.hpp:177:13:touchgfx::GenericCallback<T1, void, void>::~GenericCallback() [with T1 = const touchgfx::AbstractButton&]	16	static

@@ -1,2 +1,3 @@
 Model.cpp:4:1:Model::Model()	16	static
 Model.cpp:8:6:void Model::tick()	16	static
+Model.cpp:12:6:void Model::setText()	16	static

@@ -8,7 +8,9 @@
 #include <mvp/View.hpp>
 #include <gui/screen2_screen/Screen2Presenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/containers/buttons/Buttons.hpp>
+#include <touchgfx/widgets/ButtonWithLabel.hpp>
 
 class Screen2ViewBase : public touchgfx::View<Screen2Presenter>
 {
@@ -17,6 +19,19 @@ public:
     virtual ~Screen2ViewBase() {}
 
     virtual void setupScreen();
+
+    /*
+     * Custom Action Handlers
+     */
+    virtual void uart_init_clicked()
+    {
+        // Override and implement this function in Screen2View
+    }
+
+    virtual void uart_send_clicked()
+    {
+        // Override and implement this function in Screen2View
+    }
 
 protected:
     FrontendApplication& application() {
@@ -27,7 +42,10 @@ protected:
      * Member Declarations
      */
     touchgfx::Box box1;
-    touchgfx::Button button1;
+    touchgfx::TextArea textArea1;
+    touchgfx::IconButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > flexButton1;
+    touchgfx::ButtonWithLabel buttonWithLabel1;
+    touchgfx::ButtonWithLabel buttonWithLabel1_send;
 
 private:
 
@@ -35,11 +53,13 @@ private:
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
 
     /*
      * Callback Declarations
      */
     touchgfx::Callback<Screen2ViewBase, const touchgfx::AbstractButton&> buttonCallback;
+    touchgfx::Callback<Screen2ViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
 
 };
 

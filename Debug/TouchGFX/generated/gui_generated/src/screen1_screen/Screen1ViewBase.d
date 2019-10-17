@@ -51,6 +51,7 @@ TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.o: \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TypedText.hpp \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Texts.hpp \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp \
+ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp \
  C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Color.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/images/include/BitmapDatabase.hpp \
  C:/TouchGFXProjects/f746g-disco-test/TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp
@@ -156,6 +157,8 @@ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/
 C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Texts.hpp:
 
 C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/TextAreaWithWildcard.hpp:
+
+C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/widgets/ButtonWithIcon.hpp:
 
 C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Color.hpp:
 

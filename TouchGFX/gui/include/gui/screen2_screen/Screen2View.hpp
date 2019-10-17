@@ -11,6 +11,8 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void uart_init_clicked();
+    virtual void uart_send_clicked();
 protected:
 };
 

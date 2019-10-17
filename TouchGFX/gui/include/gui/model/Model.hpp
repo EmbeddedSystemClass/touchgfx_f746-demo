@@ -35,6 +35,7 @@ public:
      * the ModelListener interface.
      */
     void tick();
+    void setText();
 protected:
     /**
      * Pointer to the currently active presenter.

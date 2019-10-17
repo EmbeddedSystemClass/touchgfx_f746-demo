@@ -9,41 +9,45 @@
 Screen1ViewBase::Screen1ViewBase() :
     buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
 {
-    box1.setPosition(0, 0, 551, 326);
+    box1.setPosition(1, 0, 480, 272);
     box1.setColor(touchgfx::Color::getColorFrom24BitRGB(38, 51, 59));
 
-    button2.setXY(155, 103);
-    button2.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    button2.setAction(buttonCallback);
-
-    button3.setXY(155, 21);
+    button3.setXY(155, 34);
     button3.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
     button3.setAction(buttonCallback);
 
-    textArea1.setXY(194, 39);
+    textArea1.setXY(181, 52);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(199, 196, 196));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(TypedText(T_SINGLEUSEID1));
 
-    textArea2.setXY(186, 121);
+    textArea2.setXY(42, -136);
     textArea2.setColor(touchgfx::Color::getColorFrom24BitRGB(194, 188, 188));
     textArea2.setLinespacing(0);
     textArea2.setTypedText(TypedText(T_SINGLEUSEID2));
 
-    textArea3.setXY(194, 198);
-    textArea3.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+    box2.setPosition(36, 111, 408, 50);
+    box2.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
+
+    textArea3.setPosition(133, 124, 214, 25);
+    textArea3.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea3.setLinespacing(0);
-    textArea3Buffer[0] = 0;
+    Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%s", TypedText(T_SINGLEUSEID4).getText());
     textArea3.setWildcard(textArea3Buffer);
-    textArea3.resizeToCurrentText();
     textArea3.setTypedText(TypedText(T_SINGLEUSEID3));
 
+    buttonWithIcon1.setXY(155, 198);
+    buttonWithIcon1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
+    buttonWithIcon1.setIconXY(81, 15);
+    buttonWithIcon1.setAction(buttonCallback);
+
     add(box1);
-    add(button2);
     add(button3);
     add(textArea1);
     add(textArea2);
+    add(box2);
     add(textArea3);
+    add(buttonWithIcon1);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -53,23 +57,18 @@ void Screen1ViewBase::setupScreen()
 
 void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &button2)
-    {
-        //Interaction1
-        //When button2 clicked change screen to Screen2
-        //Go to Screen2 with screen transition towards West
-        application().gotoScreen2ScreenSlideTransitionWest();
-
-        //Interaction2
-        //When button2 clicked call virtual function
-        //Call button2click
-        button2click();
-    }
-    else if (&src == &button3)
+    if (&src == &button3)
     {
         //Interaction3
         //When button3 clicked call virtual function
         //Call button3click
         button3click();
+    }
+    else if (&src == &buttonWithIcon1)
+    {
+        //Interaction4
+        //When buttonWithIcon1 clicked change screen to Screen2
+        //Go to Screen2 with screen transition towards West
+        application().gotoScreen2ScreenSlideTransitionWest();
     }
 }

@@ -8,3 +8,10 @@ Model::Model() : modelListener(0)
 void Model::tick()
 {
 }
+
+void Model::setText()
+{
+
+
+
+}

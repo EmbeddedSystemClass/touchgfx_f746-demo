@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/ButtonWithIcon.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -23,11 +24,6 @@ public:
     /*
      * Custom Action Handlers
      */
-    virtual void button2click()
-    {
-        // Override and implement this function in Screen1View
-    }
-
     virtual void button3click()
     {
         // Override and implement this function in Screen1View
@@ -42,16 +38,17 @@ protected:
      * Member Declarations
      */
     touchgfx::Box box1;
-    touchgfx::Button button2;
     touchgfx::Button button3;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea2;
+    touchgfx::Box box2;
     touchgfx::TextAreaWithOneWildcard textArea3;
+    touchgfx::ButtonWithIcon buttonWithIcon1;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t TEXTAREA3_SIZE = 21;
+    static const uint16_t TEXTAREA3_SIZE = 24;
     touchgfx::Unicode::UnicodeChar textArea3Buffer[TEXTAREA3_SIZE];
 
 private:

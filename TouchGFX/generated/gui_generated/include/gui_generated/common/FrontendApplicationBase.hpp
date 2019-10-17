@@ -18,7 +18,7 @@ public:
     // Screen1
     void gotoScreen1ScreenNoTransition();
 
-    void gotoScreen1ScreenSlideTransitionEast();
+    void gotoScreen1ScreenSlideTransitionWest();
 
 
     // Screen2
@@ -32,7 +32,7 @@ protected:
     // Screen1
     void gotoScreen1ScreenNoTransitionImpl();
 
-    void gotoScreen1ScreenSlideTransitionEastImpl();
+    void gotoScreen1ScreenSlideTransitionWestImpl();
 
 
     // Screen2
