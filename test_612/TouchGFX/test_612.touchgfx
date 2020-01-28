@@ -1,0 +1,339 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Components": [
+          {
+            "Color": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Alpha": 255,
+            "Name": "backgroundBox",
+            "X": 0,
+            "Y": 0,
+            "Width": 800,
+            "Height": 480,
+            "Type": "Box",
+            "Visible": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "RelativeFilename": "bg.png",
+            "Alpha": 255,
+            "Name": "backgroundImage",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 272,
+            "Type": "Image",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Alpha": 255,
+            "Selected": true,
+            "Deselectable": false,
+            "FileNameSelected": "radio_button_selected.png",
+            "FileNameSelectedPressed": "radio_button_selected_pressed.png",
+            "FileNameUnselected": "radio_button_unselected.png",
+            "FileNameUnselectedPressed": "radio_button_unselected_pressed.png",
+            "RadioButtonGroup": "radioButtonGroup",
+            "Name": "radioButton1",
+            "X": 56,
+            "Y": 25,
+            "Width": 42,
+            "Height": 42,
+            "Type": "RadioButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Alpha": 255,
+            "Selected": false,
+            "Deselectable": false,
+            "FileNameSelected": "radio_button_selected.png",
+            "FileNameSelectedPressed": "radio_button_selected_pressed.png",
+            "FileNameUnselected": "radio_button_unselected.png",
+            "FileNameUnselectedPressed": "radio_button_unselected_pressed.png",
+            "RadioButtonGroup": "radioButtonGroup",
+            "Name": "radioButton2",
+            "X": 56,
+            "Y": 78,
+            "Width": 42,
+            "Height": 42,
+            "Type": "RadioButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Alpha": 255,
+            "Selected": false,
+            "Deselectable": false,
+            "FileNameSelected": "radio_button_selected.png",
+            "FileNameSelectedPressed": "radio_button_selected_pressed.png",
+            "FileNameUnselected": "radio_button_unselected.png",
+            "FileNameUnselectedPressed": "radio_button_unselected_pressed.png",
+            "RadioButtonGroup": "radioButtonGroup",
+            "Name": "radioButton3",
+            "X": 56,
+            "Y": 129,
+            "Width": 42,
+            "Height": 42,
+            "Type": "RadioButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Alpha": 255,
+            "Selected": false,
+            "Deselectable": false,
+            "FileNameSelected": "radio_button_selected.png",
+            "FileNameSelectedPressed": "radio_button_selected_pressed.png",
+            "FileNameUnselected": "radio_button_unselected.png",
+            "FileNameUnselectedPressed": "radio_button_unselected_pressed.png",
+            "RadioButtonGroup": "radioButtonGroup",
+            "Name": "radioButton4",
+            "X": 56,
+            "Y": 181,
+            "Width": 42,
+            "Height": 42,
+            "Type": "RadioButton",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "TextId1",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 3
+            },
+            "Name": "selectedText",
+            "X": 114,
+            "Y": 137,
+            "Width": 202,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "TextId": "TextId2",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": true,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 3
+            },
+            "Name": "deselectedText",
+            "X": 114,
+            "Y": 189,
+            "Width": 224,
+            "Height": 23,
+            "Type": "TextArea",
+            "Visible": true,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "RadioButton1Selected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton1",
+              "Type": "TriggerRadioButtonSelected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(selectedTextBuffer, 4, \"%d\", 1);\r\nselectedText.resizeToCurrentText();\r\nselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton2Selected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton2",
+              "Type": "TriggerRadioButtonSelected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(selectedTextBuffer, 4, \"%d\", 2);\r\nselectedText.resizeToCurrentText();\r\nselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton3Selected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton3",
+              "Type": "TriggerRadioButtonSelected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(selectedTextBuffer, 4, \"%d\", 3);\r\nselectedText.resizeToCurrentText();\r\nselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton4Selected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton4",
+              "Type": "TriggerRadioButtonSelected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(selectedTextBuffer, 4, \"%d\", 4);\r\nselectedText.resizeToCurrentText();\r\nselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton1Deselected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton1",
+              "Type": "TriggerRadioButtonDeselected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(deselectedTextBuffer, 4, \"%d\", 1);\r\ndeselectedText.resizeToCurrentText();\r\ndeselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton2Deselected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton2",
+              "Type": "TriggerRadioButtonDeselected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(deselectedTextBuffer, 4, \"%d\", 2);\r\ndeselectedText.resizeToCurrentText();\r\ndeselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton3Deselected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton3",
+              "Type": "TriggerRadioButtonDeselected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(deselectedTextBuffer, 4, \"%d\", 3);\r\ndeselectedText.resizeToCurrentText();\r\ndeselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          },
+          {
+            "InteractionName": "RadioButton4Deselected",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "TriggerComponent": "radioButton4",
+              "Type": "TriggerRadioButtonDeselected"
+            },
+            "Action": {
+              "Code": "Unicode::snprintf(deselectedTextBuffer, 4, \"%d\", 4);\r\ndeselectedText.resizeToCurrentText();\r\ndeselectedText.invalidate();",
+              "Type": "ActionExecuteCode"
+            }
+          }
+        ],
+        "Name": "Main",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "TextEntries": [
+      {
+        "TextEntryId": "TextId1",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "TextId2",
+        "IsResource": true
+      }
+    ],
+    "Name": "test_612",
+    "Resolution": {
+      "Width": 480,
+      "Height": 272
+    },
+    "SelectedColorDepth": 24,
+    "StartupScreenName": "Main",
+    "SelectedStartupLanguage": "GB",
+    "Skin": "Blue",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      24
+    ],
+    "AvailableLCDs": {
+      "24": "LCD24bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 480,
+        "Height": 272
+      }
+    ],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD24bpp": {
+        "Id": "LCD24bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project --project-file=../test_612.ioc --platform=m7",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape"
+  },
+  "Version": "4.13.0"
+}

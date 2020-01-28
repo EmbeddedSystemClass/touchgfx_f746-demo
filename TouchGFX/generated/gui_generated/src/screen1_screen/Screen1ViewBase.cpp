@@ -38,7 +38,7 @@ Screen1ViewBase::Screen1ViewBase() :
 
     buttonWithIcon1.setXY(155, 198);
     buttonWithIcon1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
-    buttonWithIcon1.setIconXY(81, 15);
+    buttonWithIcon1.setIconXY(77, 15);
     buttonWithIcon1.setAction(buttonCallback);
 
     add(box1);
