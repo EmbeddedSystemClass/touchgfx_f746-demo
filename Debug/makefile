@@ -1,5 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
 ################################################################################
 
 -include ../makefile.init
@@ -30,7 +31,6 @@ RM := rm -rf
 -include TouchGFX/build/MINGW32_NT-6.2/generated/images/src/__designer/subdir.mk
 -include TouchGFX/build/MINGW32_NT-6.2/generated/images/src/subdir.mk
 -include TouchGFX/build/MINGW32_NT-6.2/generated/gui_generated/src/screen2_screen/subdir.mk
--include TouchGFX/build/MINGW32_NT-6.2/generated/gui_generated/src/screen1_screen/subdir.mk
 -include TouchGFX/build/MINGW32_NT-6.2/generated/gui_generated/src/common/subdir.mk
 -include TouchGFX/build/MINGW32_NT-6.2/generated/fonts/src/subdir.mk
 -include Startup/subdir.mk
@@ -70,6 +70,12 @@ endif
 ifneq ($(strip $(CXX_DEPS)),)
 -include $(CXX_DEPS)
 endif
+ifneq ($(strip $(S_DEPS)),)
+-include $(S_DEPS)
+endif
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
@@ -79,6 +85,17 @@ endif
 endif
 
 -include ../makefile.defs
+
+OPTIONAL_TOOL_DEPS := \
+$(wildcard ../makefile.defs) \
+$(wildcard ../makefile.init) \
+$(wildcard ../makefile.targets) \
+
+
+BUILD_ARTIFACT_NAME := f746g-disco-test
+BUILD_ARTIFACT_EXTENSION := elf
+BUILD_ARTIFACT_PREFIX := 
+BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
@@ -90,23 +107,34 @@ default.size.stdout \
 OBJDUMP_LIST += \
 f746g-disco-test.list \
 
+OBJCOPY_BIN += \
+f746g-disco-test.bin \
+
 
 # All Target
-all: f746g-disco-test.elf secondary-outputs
+all: main-build
+
+# Main-build Target
+main-build: f746g-disco-test.elf secondary-outputs
 
 # Tool invocations
-f746g-disco-test.elf: $(OBJS) $(USER_OBJS) C:\TouchGFXProjects\f746g-disco-test\STM32F746NGHX_FLASH.ld
-	arm-none-eabi-g++ -o "f746g-disco-test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\TouchGFXProjects\f746g-disco-test\STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f746g-disco-test.map" -Wl,--gc-sections -static -L"C:\TouchGFXProjects\f746g-disco-test\Middlewares\ST\TouchGFX\touchgfx\lib\core\cortex_m7\gcc" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+f746g-disco-test.elf: $(OBJS) $(USER_OBJS) D:\GitHubRepos\STM32\touchgfx_f746-demo\STM32F746NGHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "f746g-disco-test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\GitHubRepos\STM32\touchgfx_f746-demo\STM32F746NGHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f746g-disco-test.map" -Wl,--gc-sections -static -Wl,--start-group -ltouchgfx-float-abi-hard -Wl,--end-group -L"D:\GitHubRepos\STM32\touchgfx_f746-demo\Middlewares\ST\TouchGFX\touchgfx\lib\core\cortex_m7\gcc" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-default.size.stdout: $(EXECUTABLES)
+default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-size  $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-f746g-disco-test.list: $(EXECUTABLES)
+f746g-disco-test.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "f746g-disco-test.list"
+	@echo 'Finished building: $@'
+	@echo ' '
+
+f746g-disco-test.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "f746g-disco-test.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
@@ -115,9 +143,16 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
-.PHONY: all clean dependents
+fail-specified-linker-script-missing:
+	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
+	@exit 2
+
+warn-no-linker-script-specified:
+	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
+
+.PHONY: all clean dependents fail-specified-linker-script-missing warn-no-linker-script-specified
 .SECONDARY:
 
 -include ../makefile.targets

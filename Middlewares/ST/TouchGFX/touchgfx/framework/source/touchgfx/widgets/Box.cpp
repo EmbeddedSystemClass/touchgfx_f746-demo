@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -14,13 +14,14 @@
   */
 
 #include <touchgfx/widgets/Box.hpp>
+#include <touchgfx/hal/HAL.hpp>
 
 namespace touchgfx
 {
 Rect Box::getSolidRect() const
 {
     Rect solidRect(0, 0, 0, 0);
-    if (reportAsSolid || alpha == 255)
+    if (alpha == 255)
     {
         solidRect.width = rect.width;
         solidRect.height = rect.height;

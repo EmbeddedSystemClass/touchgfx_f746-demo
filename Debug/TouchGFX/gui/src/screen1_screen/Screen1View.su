@@ -76,8 +76,8 @@ Screen1View.cpp:5:6:virtual void Screen1View::initUART()	16	static
 Screen1View.cpp:10:1:Screen1View::Screen1View()	16	static
 Screen1View.cpp:15:6:virtual void Screen1View::setupScreen()	16	static
 Screen1View.cpp:21:6:virtual void Screen1View::tearDownScreen()	16	static
-Screen1View.cpp:29:6:virtual void Screen1View::button3click()	80	static
-Screen1View.cpp:49:6:virtual void Screen1View::button2click()	16	static
+Screen1View.cpp:28:6:virtual void Screen1View::button3click()	80	static
+Screen1View.cpp:48:6:virtual void Screen1View::button2click()	16	static
 TextAreaWithWildcard.hpp:75:7:touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	16	static
 TextAreaWithWildcard.hpp:75:7:virtual touchgfx::TextAreaWithOneWildcard::~TextAreaWithOneWildcard()	16	static
 ButtonWithIcon.hpp:32:7:touchgfx::ButtonWithIcon::~ButtonWithIcon()	16	static

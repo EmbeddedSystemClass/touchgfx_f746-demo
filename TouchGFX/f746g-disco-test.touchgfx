@@ -4,6 +4,7 @@
       {
         "Components": [
           {
+            "Type": "Box",
             "Color": {
               "Red": 38,
               "Green": 51,
@@ -15,14 +16,15 @@
             "Y": 0,
             "Width": 480,
             "Height": 272,
-            "Type": "Box",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "Button",
             "Pressed": "__designer\\blue_buttons_round_edge_small_pressed.png",
             "Released": "__designer\\blue_buttons_round_edge_small.png",
             "Alpha": 255,
@@ -32,14 +34,15 @@
             "Y": 34,
             "Width": 170,
             "Height": 60,
-            "Type": "Button",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "TextArea",
             "TextId": "SingleUseId1",
             "TextRotation": "0",
             "Color": {
@@ -55,14 +58,15 @@
             "Y": 52,
             "Width": 119,
             "Height": 25,
-            "Type": "TextArea",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "TextArea",
             "TextId": "SingleUseId2",
             "TextRotation": "0",
             "Color": {
@@ -78,14 +82,15 @@
             "Y": -136,
             "Width": 109,
             "Height": 25,
-            "Type": "TextArea",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "Box",
             "Color": {
               "Red": 255,
               "Green": 255,
@@ -97,14 +102,15 @@
             "Y": 111,
             "Width": 408,
             "Height": 50,
-            "Type": "Box",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "TextArea",
             "TextId": "SingleUseId3",
             "TextRotation": "0",
             "Color": {
@@ -125,14 +131,15 @@
             "Y": 124,
             "Width": 214,
             "Height": 25,
-            "Type": "TextArea",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "ButtonWithIcon",
             "Pressed": "__designer\\blue_buttons_round_edge_small_pressed.png",
             "Released": "__designer\\blue_buttons_round_edge_small.png",
             "Alpha": 255,
@@ -148,8 +155,8 @@
             "Y": 198,
             "Width": 170,
             "Height": 60,
-            "Type": "ButtonWithIcon",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
@@ -161,26 +168,26 @@
             "InteractionName": "Interaction3",
             "HasCompletedTrigger": false,
             "Trigger": {
-              "TriggerComponent": "button3",
-              "Type": "TriggerClicked"
+              "Type": "TriggerClicked",
+              "TriggerComponent": "button3"
             },
             "Action": {
-              "FunctionName": "button3click",
-              "Type": "ActionCustom"
+              "Type": "ActionCustom",
+              "FunctionName": "button3click"
             }
           },
           {
             "InteractionName": "Interaction4",
             "HasCompletedTrigger": false,
             "Trigger": {
-              "TriggerComponent": "buttonWithIcon1",
-              "Type": "TriggerClicked"
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithIcon1"
             },
             "Action": {
+              "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "West",
-              "ActionComponent": "Screen2",
-              "Type": "ActionGotoScreen"
+              "ActionComponent": "Screen2"
             }
           }
         ],
@@ -191,6 +198,7 @@
       {
         "Components": [
           {
+            "Type": "Box",
             "Color": {
               "Red": 17,
               "Green": 138,
@@ -202,14 +210,15 @@
             "Y": 0,
             "Width": 507,
             "Height": 311,
-            "Type": "Box",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "TextArea",
             "TextId": "SingleUseId5",
             "TextRotation": "0",
             "Color": {
@@ -225,14 +234,15 @@
             "Y": 10,
             "Width": 112,
             "Height": 25,
-            "Type": "TextArea",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "FlexButton",
             "Alpha": 255,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
@@ -280,14 +290,15 @@
             "Y": 215,
             "Width": 95,
             "Height": 44,
-            "Type": "FlexButton",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "ButtonWithLabel",
             "Pressed": "__designer\\blue_buttons_round_edge_small_pressed.png",
             "Released": "__designer\\blue_buttons_round_edge_small.png",
             "Alpha": 255,
@@ -309,14 +320,15 @@
             "Y": 70,
             "Width": 170,
             "Height": 60,
-            "Type": "ButtonWithLabel",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
           },
           {
+            "Type": "ButtonWithLabel",
             "Pressed": "__designer\\blue_buttons_round_edge_small_pressed.png",
             "Released": "__designer\\blue_buttons_round_edge_small.png",
             "Alpha": 255,
@@ -338,8 +350,8 @@
             "Y": 136,
             "Width": 170,
             "Height": 60,
-            "Type": "ButtonWithLabel",
             "Visible": true,
+            "LockPosition": false,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
@@ -351,38 +363,38 @@
             "InteractionName": "Interaction1",
             "HasCompletedTrigger": false,
             "Trigger": {
-              "TriggerComponent": "flexButton1",
-              "Type": "TriggerClicked"
+              "Type": "TriggerClicked",
+              "TriggerComponent": "flexButton1"
             },
             "Action": {
+              "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "West",
-              "ActionComponent": "Screen1",
-              "Type": "ActionGotoScreen"
+              "ActionComponent": "Screen1"
             }
           },
           {
             "InteractionName": "Interaction2",
             "HasCompletedTrigger": false,
             "Trigger": {
-              "TriggerComponent": "buttonWithLabel1",
-              "Type": "TriggerClicked"
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithLabel1"
             },
             "Action": {
-              "FunctionName": "uart_init_clicked",
-              "Type": "ActionCustom"
+              "Type": "ActionCustom",
+              "FunctionName": "uart_init_clicked"
             }
           },
           {
             "InteractionName": "Interaction3",
             "HasCompletedTrigger": false,
             "Trigger": {
-              "TriggerComponent": "buttonWithLabel1_send",
-              "Type": "TriggerClicked"
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithLabel1_send"
             },
             "Action": {
-              "FunctionName": "uart_send_clicked",
-              "Type": "ActionCustom"
+              "Type": "ActionCustom",
+              "FunctionName": "uart_send_clicked"
             }
           }
         ],
@@ -433,28 +445,38 @@
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/TouchGFX/touchgfx/",
     "UIPath": ".",
-    "ApplicationTemplate": {
-      "Name": "Simulator",
-      "Version": "1.0.0",
-      "Description": "STM32CubeMX Generated Simulator Application Template",
-      "AvailableColorDepths": [
-        16
-      ],
-      "AvailableImageFormats": {
-        "16": {
-          "Opaque": "RGB565",
-          "NonOpaque": "ARGB8888"
-        }
-      },
-      "AvailableResolutions": [],
-      "PhysicalButtons": [],
-      "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j10",
-      "PostGenerateCommand": "echo test",
-      "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j10",
-      "RunSimulatorCommand": "build\\bin\\simulator.exe",
-      "CompileTargetCommand": "",
-      "FlashTargetCommand": ""
-    }
+    "ApplicationTemplateName": "Simulator",
+    "ApplicationTemplateVersion": "1.0.0",
+    "ApplicationTemplateDescription": "STM32CubeMX Generated Simulator Application Template",
+    "AvailableColorDepths": [
+      16
+    ],
+    "AvailableLCDs": {
+      "16": "LCD16bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD16bpp": {
+        "Id": "LCD16bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j10",
+    "PostGenerateCommand": "echo test",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j10",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "CompileTargetCommand": "",
+    "FlashTargetCommand": "",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape"
   },
-  "Version": "4.10.0"
+  "Version": "4.16.1"
 }

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,12 +17,12 @@
 
 namespace touchgfx
 {
-AnimationTextureMapper::AnimationTextureMapper() :
-    TextureMapper(),
-    textureMapperAnimationStepCallback(0),
-    textureMapperAnimationEndedCallback(0),
-    animationCounter(0),
-    animationRunning(false)
+AnimationTextureMapper::AnimationTextureMapper()
+    : TextureMapper(),
+      textureMapperAnimationStepCallback(0),
+      textureMapperAnimationEndedCallback(0),
+      animationCounter(0),
+      animationRunning(false)
 {
     for (int i = 0; i < NUMBER_OF_ANIMATION_PARAMETERS; i++)
     {
@@ -30,16 +30,12 @@ AnimationTextureMapper::AnimationTextureMapper() :
     }
 }
 
-AnimationTextureMapper::~AnimationTextureMapper()
-{
-}
-
-void AnimationTextureMapper::setTextureMapperAnimationStepAction(GenericCallback<const AnimationTextureMapper& >& callback)
+void AnimationTextureMapper::setTextureMapperAnimationStepAction(GenericCallback<const AnimationTextureMapper&>& callback)
 {
     textureMapperAnimationStepCallback = &callback;
 }
 
-void AnimationTextureMapper::setTextureMapperAnimationEndedAction(GenericCallback<const AnimationTextureMapper& >& callback)
+void AnimationTextureMapper::setTextureMapperAnimationEndedAction(GenericCallback<const AnimationTextureMapper&>& callback)
 {
     textureMapperAnimationEndedCallback = &callback;
 }
@@ -70,6 +66,16 @@ void AnimationTextureMapper::startAnimation()
     animations[SCALE].animationStart = scale;
 
     animationRunning = true;
+
+    for (int i = 0; i < NUMBER_OF_ANIMATION_PARAMETERS; i++)
+    {
+        if (animations[i].animationActive && animations[i].animationDelay + animations[i].animationDuration > 0)
+        {
+            return; // Animation needs to run, return
+        }
+    }
+    // No active animations or all active animations have zero steps, execute now!
+    handleTickEvent();
 }
 
 void AnimationTextureMapper::cancelAnimationTextureMapperAnimation()
@@ -92,7 +98,10 @@ void AnimationTextureMapper::handleTickEvent()
 {
     if (animationRunning)
     {
-        bool activeAnimation = false;
+        bool newValuesAssigned = false;
+        bool activeAnimationExists = false;
+
+        animationCounter++;
 
         float newXAngle = xAngle;
         float newYAngle = yAngle;
@@ -106,11 +115,8 @@ void AnimationTextureMapper::handleTickEvent()
                 continue;
             }
 
-            if ((animationCounter >= animations[i].animationDelay) &&
-                    (animationCounter <= (uint32_t)(animations[i].animationDelay + animations[i].animationDuration)))
+            if (animationCounter >= animations[i].animationDelay)
             {
-                activeAnimation = true;
-
                 // Adjust the used animationCounter for the startup delay
                 uint32_t actualAnimationCounter = animationCounter - animations[i].animationDelay;
 
@@ -147,10 +153,19 @@ void AnimationTextureMapper::handleTickEvent()
                 default:
                     break;
                 }
+                newValuesAssigned = true;
+            }
+            if (animationCounter >= (uint32_t)(animations[i].animationDelay + animations[i].animationDuration))
+            {
+                animations[i].animationActive = false;
+            }
+            else
+            {
+                activeAnimationExists = true;
             }
         }
 
-        if (activeAnimation)
+        if (newValuesAssigned)
         {
             updateAngles(newXAngle, newYAngle, newZAngle);
             setScale(newScale);
@@ -159,10 +174,8 @@ void AnimationTextureMapper::handleTickEvent()
             {
                 textureMapperAnimationStepCallback->execute(*this);
             }
-
-            animationCounter++;
         }
-        else
+        if (!activeAnimationExists)
         {
             // End of animation
             cancelAnimationTextureMapperAnimation();
@@ -174,4 +187,4 @@ void AnimationTextureMapper::handleTickEvent()
         }
     }
 }
-}
+} // namespace touchgfx

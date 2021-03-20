@@ -10,13 +10,17 @@ Screen2ViewBase::Screen2ViewBase() :
     buttonCallback(this, &Screen2ViewBase::buttonCallbackHandler),
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
 {
+
+    __background.setPosition(0, 0, 480, 272);
+    __background.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+
     box1.setPosition(0, 0, 507, 311);
     box1.setColor(touchgfx::Color::getColorFrom24BitRGB(17, 138, 120));
 
     textArea1.setXY(352, 10);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea1.setLinespacing(0);
-    textArea1.setTypedText(TypedText(T_SINGLEUSEID5));
+    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID5));
 
     flexButton1.setBoxWithBorderPosition(0, 0, 95, 44);
     flexButton1.setBorderSize(0);
@@ -27,19 +31,20 @@ Screen2ViewBase::Screen2ViewBase() :
     flexButton1.setAction(flexButtonCallback);
 
     buttonWithLabel1.setXY(160, 70);
-    buttonWithLabel1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    buttonWithLabel1.setLabelText(TypedText(T_SINGLEUSEID6));
+    buttonWithLabel1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    buttonWithLabel1.setLabelText(touchgfx::TypedText(T_SINGLEUSEID6));
     buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonWithLabel1.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonWithLabel1.setAction(buttonCallback);
 
     buttonWithLabel1_send.setXY(160, 136);
-    buttonWithLabel1_send.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    buttonWithLabel1_send.setLabelText(TypedText(T_SINGLEUSEID7));
+    buttonWithLabel1_send.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    buttonWithLabel1_send.setLabelText(touchgfx::TypedText(T_SINGLEUSEID7));
     buttonWithLabel1_send.setLabelColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonWithLabel1_send.setLabelColorPressed(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     buttonWithLabel1_send.setAction(buttonCallback);
 
+    add(__background);
     add(box1);
     add(textArea1);
     add(flexButton1);

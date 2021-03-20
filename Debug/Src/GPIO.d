@@ -1,4 +1,4 @@
 Src/GPIO.o: ../Src/GPIO.cpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:

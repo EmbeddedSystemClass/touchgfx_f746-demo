@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -22,10 +22,6 @@ LineProgress::LineProgress()
 {
     progressIndicatorContainer.add(line);
     line.setPosition(0, 0, getWidth(), getHeight());
-}
-
-LineProgress::~LineProgress()
-{
 }
 
 void LineProgress::setProgressIndicatorPosition(int16_t x, int16_t y, int16_t width, int16_t height)
@@ -82,14 +78,14 @@ void LineProgress::setLineEndingStyle(Line::LINE_ENDING_STYLE lineEndingStyle)
     line.setLineEndingStyle(lineEndingStyle);
 }
 
-touchgfx::Line::LINE_ENDING_STYLE LineProgress::getLineEndingStyle() const
+Line::LINE_ENDING_STYLE LineProgress::getLineEndingStyle() const
 {
     return line.getLineEndingStyle();
 }
 
-void LineProgress::setAlpha(uint8_t alpha)
+void LineProgress::setAlpha(uint8_t newAlpha)
 {
-    line.setAlpha(alpha);
+    line.setAlpha(newAlpha);
 }
 
 uint8_t LineProgress::getAlpha() const
@@ -110,4 +106,4 @@ void LineProgress::setValue(int value)
         line.updateEnd(x, y);
     }
 }
-}
+} // namespace touchgfx

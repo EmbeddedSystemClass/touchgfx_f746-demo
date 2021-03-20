@@ -6,6 +6,11 @@
 
 #include <touchgfx/FontManager.hpp>
 
+namespace touchgfx
+{
+    class FlashDataReader;
+}
+
 struct Typography
 {
     static const touchgfx::FontId DEFAULT = 0;
@@ -13,10 +18,21 @@ struct Typography
     static const touchgfx::FontId SMALL = 2;
 };
 
+struct TypographyFontIndex
+{
+    static const touchgfx::FontId DEFAULT = 0; // verdana_20_4bpp
+    static const touchgfx::FontId LARGE = 1;   // verdana_40_4bpp
+    static const touchgfx::FontId SMALL = 2;   // verdana_10_4bpp
+    static const uint16_t NUMBER_OF_FONTS = 3;
+};
+
 class ApplicationFontProvider : public touchgfx::FontProvider
 {
 public:
-    virtual touchgfx::Font* getFont(touchgfx::FontId fontId);
+    virtual touchgfx::Font* getFont(touchgfx::FontId typography);
+
+    static void setFlashReader(touchgfx::FlashDataReader* /* flashReader */) { }
+    static touchgfx::FlashDataReader* getFlashReader() { return 0; }
 };
 
-#endif /* APPLICATIONFONTPROVIDER_HPP */
+#endif // APPLICATIONFONTPROVIDER_HPP

@@ -20,7 +20,6 @@ public:
 
     void gotoScreen1ScreenSlideTransitionWest();
 
-
     // Screen2
     void gotoScreen2ScreenSlideTransitionWest();
 
@@ -33,7 +32,6 @@ protected:
     void gotoScreen1ScreenNoTransitionImpl();
 
     void gotoScreen1ScreenSlideTransitionWestImpl();
-
 
     // Screen2
     void gotoScreen2ScreenSlideTransitionWestImpl();

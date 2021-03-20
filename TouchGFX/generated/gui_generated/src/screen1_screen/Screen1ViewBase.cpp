@@ -9,22 +9,26 @@
 Screen1ViewBase::Screen1ViewBase() :
     buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
 {
+
+    __background.setPosition(0, 0, 480, 272);
+    __background.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+
     box1.setPosition(1, 0, 480, 272);
     box1.setColor(touchgfx::Color::getColorFrom24BitRGB(38, 51, 59));
 
     button3.setXY(155, 34);
-    button3.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
+    button3.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
     button3.setAction(buttonCallback);
 
     textArea1.setXY(181, 52);
     textArea1.setColor(touchgfx::Color::getColorFrom24BitRGB(199, 196, 196));
     textArea1.setLinespacing(0);
-    textArea1.setTypedText(TypedText(T_SINGLEUSEID1));
+    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID1));
 
     textArea2.setXY(42, -136);
     textArea2.setColor(touchgfx::Color::getColorFrom24BitRGB(194, 188, 188));
     textArea2.setLinespacing(0);
-    textArea2.setTypedText(TypedText(T_SINGLEUSEID2));
+    textArea2.setTypedText(touchgfx::TypedText(T_SINGLEUSEID2));
 
     box2.setPosition(36, 111, 408, 50);
     box2.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
@@ -32,15 +36,16 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea3.setPosition(133, 124, 214, 25);
     textArea3.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
     textArea3.setLinespacing(0);
-    Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%s", TypedText(T_SINGLEUSEID4).getText());
+    Unicode::snprintf(textArea3Buffer, TEXTAREA3_SIZE, "%s", touchgfx::TypedText(T_SINGLEUSEID4).getText());
     textArea3.setWildcard(textArea3Buffer);
-    textArea3.setTypedText(TypedText(T_SINGLEUSEID3));
+    textArea3.setTypedText(touchgfx::TypedText(T_SINGLEUSEID3));
 
     buttonWithIcon1.setXY(155, 198);
-    buttonWithIcon1.setBitmaps(Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
-    buttonWithIcon1.setIconXY(77, 15);
+    buttonWithIcon1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID), touchgfx::Bitmap(BITMAP_BLUE_ICONS_BACK_ARROW_32_ID));
+    buttonWithIcon1.setIconXY(81, 15);
     buttonWithIcon1.setAction(buttonCallback);
 
+    add(__background);
     add(box1);
     add(button3);
     add(textArea1);

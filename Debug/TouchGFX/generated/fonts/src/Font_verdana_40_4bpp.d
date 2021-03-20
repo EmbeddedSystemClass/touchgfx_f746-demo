@@ -1,8 +1,8 @@
 TouchGFX/generated/fonts/src/Font_verdana_40_4bpp.o: \
  ../TouchGFX/generated/fonts/src/Font_verdana_40_4bpp.cpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:

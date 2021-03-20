@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -20,10 +20,13 @@ namespace touchgfx
 class AdjustElements
 {
 public:
-    AdjustElements(Drawable* d, Direction dir) : insertedCoord(0),
-        newElementPassed(false),
-        newElement(d),
-        direction(dir) {}
+    AdjustElements(Drawable* d, Direction dir)
+        : insertedCoord(0),
+          newElementPassed(false),
+          newElement(d),
+          direction(dir)
+    {
+    }
 
     void handleInsert(Drawable& d)
     {
@@ -177,8 +180,7 @@ void ListLayout::setDirection(const Direction d)
     {
         direction = d;
         offset = 0;
-        setWidth(0);
-        setHeight(0);
+        setWidthHeight(0, 0);
         Callback<ListLayout, Drawable&> function(this, &ListLayout::internalAddElement);
         forEachChild(&function);
         if (parent)
@@ -201,8 +203,7 @@ void ListLayout::add(Drawable& d)
 void ListLayout::removeAll()
 {
     offset = 0;
-    setWidth(0);
-    setHeight(0);
+    setWidthHeight(0, 0);
     Container::removeAll();
     if (parent)
     {
@@ -210,7 +211,7 @@ void ListLayout::removeAll()
     }
 }
 
-void ListLayout::insert(Drawable* previousElement, Drawable& d)
+void ListLayout::insert(Drawable* previous, Drawable& d)
 {
     if (!firstChild)
     {
@@ -218,7 +219,7 @@ void ListLayout::insert(Drawable* previousElement, Drawable& d)
         add(d);
         return;
     }
-    Container::insert(previousElement, d);
+    Container::insert(previous, d);
     AdjustElements tmp(&d, direction);
     Callback<AdjustElements, Drawable&> function(&tmp, &AdjustElements::handleInsert);
     forEachChild(&function);

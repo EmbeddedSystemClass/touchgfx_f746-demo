@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -13,6 +13,11 @@
   ******************************************************************************
   */
 
+/**
+ * @file platform/driver/touch/NoTouchController.hpp
+ *
+ * Declares the touchgfx::NoTouchController class.
+ */
 #ifndef NOTOUCHCONTROLLER_HPP
 #define NOTOUCHCONTROLLER_HPP
 
@@ -21,44 +26,16 @@
 namespace touchgfx
 {
 /**
- * Empty TouchController implementation which does nothing. Use this if your display does
- * not have touch input capabilities.
+ * Empty TouchController implementation which does nothing. Use this if your display does not
+ * have touch input capabilities.
  */
 class NoTouchController : public TouchController
 {
 public:
-    /**
-     * @fn virtual void NoTouchController::init()
-     *
-     * @brief Empty initialization.
-     *
-     *        Empty initialization.
-     */
     virtual void init()
     {
     }
 
-    /**
-     * @fn virtual NoTouchController::~NoTouchController()
-     *
-     * @brief Destructor.
-     *
-     *        Destructor.
-     */
-    virtual ~NoTouchController()
-    {
-    }
-
-    /**
-     * @fn virtual bool NoTouchController::sampleTouch(int32_t& x, int32_t& y)
-     *
-     * @brief Does nothing.
-     *
-     * @param [out] x unused.
-     * @param [out] y unused.
-     *
-     * @return false.
-     */
     virtual bool sampleTouch(int32_t& x, int32_t& y)
     {
         return false;

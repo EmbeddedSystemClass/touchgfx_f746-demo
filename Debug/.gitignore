@@ -1,0 +1,11 @@
+/Components/
+/Drivers/
+/Middlewares/
+/STM32746G-Discovery/
+/Src/
+/Startup/
+/TouchGFX/
+/makefile
+/objects.list
+/objects.mk
+/sources.mk

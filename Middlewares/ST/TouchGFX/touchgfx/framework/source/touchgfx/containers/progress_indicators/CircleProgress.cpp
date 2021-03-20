@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -23,10 +23,6 @@ CircleProgress::CircleProgress()
     progressIndicatorContainer.add(circle);
     circle.setPosition(0, 0, getWidth(), getHeight());
     CircleProgress::setStartEndAngle(0, 360);
-}
-
-CircleProgress::~CircleProgress()
-{
 }
 
 void CircleProgress::setProgressIndicatorPosition(int16_t x, int16_t y, int16_t width, int16_t height)
@@ -85,6 +81,7 @@ void CircleProgress::setStartEndAngle(int startAngle, int endAngle)
     assert(startAngle != endAngle);
     circle.setArc(startAngle, endAngle);
     circleEndAngle = endAngle;
+    CircleProgress::setValue(CircleProgress::getValue());
 }
 
 int CircleProgress::getStartAngle() const
@@ -97,9 +94,9 @@ int CircleProgress::getEndAngle() const
     return circleEndAngle;
 }
 
-void CircleProgress::setAlpha(uint8_t alpha)
+void CircleProgress::setAlpha(uint8_t newAlpha)
 {
-    circle.setAlpha(alpha);
+    circle.setAlpha(newAlpha);
 }
 
 uint8_t CircleProgress::getAlpha() const
@@ -109,17 +106,19 @@ uint8_t CircleProgress::getAlpha() const
 
 void CircleProgress::setValue(int value)
 {
-    int startAngle = circle.getArcStart();
     AbstractProgressIndicator::setValue(value);
-    uint16_t rangeAngleSteps = circleEndAngle < startAngle ? startAngle - circleEndAngle : circleEndAngle - startAngle;
-    uint16_t progress = AbstractProgressIndicator::getProgress(rangeAngleSteps);
-    if (circleEndAngle < startAngle)
+    CWRUtil::Q5 startAngle;
+    CWRUtil::Q5 endAngle = CWRUtil::toQ5(circleEndAngle);
+    circle.getArcStart<CWRUtil::Q5>(startAngle);
+    uint16_t rangeAngleSteps = endAngle < startAngle ? (int)(startAngle - endAngle) : (int)(endAngle - startAngle);
+    CWRUtil::Q5 progress = CWRUtil::Q5(AbstractProgressIndicator::getProgress(rangeAngleSteps));
+    if (endAngle < startAngle)
     {
-        circle.updateArcEnd(startAngle - progress);
+        circle.updateArcEnd<CWRUtil::Q5>(startAngle - progress);
     }
     else
     {
-        circle.updateArcEnd(startAngle + progress);
+        circle.updateArcEnd<CWRUtil::Q5>(startAngle + progress);
     }
 }
-}
+} // namespace touchgfx

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -13,66 +13,39 @@
   ******************************************************************************
   */
 
+/**
+ * @file touchgfx/mixins/Snapper.hpp
+ *
+ * Declares the touchgfx::Snapper class.
+ */
 #ifndef SNAPPER_HPP
 #define SNAPPER_HPP
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Callback.hpp>
 #include <touchgfx/Drawable.hpp>
+#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/mixins/Draggable.hpp>
 
 namespace touchgfx
 {
 /**
- * @class Snapper Snapper.hpp touchgfx/mixins/Snapper.hpp
+ * A mix-in that will make class T draggable and able to snap to a position when a drag
+ * operation has ended. The mix-in is able to perform callbacks when the snapper gets
+ * dragged and when the Snapper snaps to its snap position.
  *
- * @brief A mix-in that will make class T draggable and able to snap to a position.
- *
- *        A mix-in that will make class T draggable and able to snap to a position when a drag
- *        operation has ended. The mix-in is able to perform callbacks when the snapper gets
- *        dragged and when the Snapper snaps to its snap position.
+ * @see Draggable<T>
  *
  * @tparam T specifies the type to enable the Snap behavior to.
- *
- * @see Draggable&lt;T&gt;
  */
 template <class T>
 class Snapper : public Draggable<T>
 {
 public:
-
-    /**
-     * @fn Snapper::Snapper()
-     *
-     * @brief Default constructor.
-     *
-     *        Default constructor.
-     */
-    Snapper() : Draggable<T>(), snapPosition(0, 0), dragAction(0), snappedAction(0)
+    Snapper()
+        : Draggable<T>(), snapPositionX(0), snapPositionY(0), dragAction(0), snappedAction(0)
     {
     }
 
-    /**
-     * @fn virtual Snapper::~Snapper()
-     *
-     * @brief Destructor.
-     *
-     *        Destructor.
-     */
-    virtual ~Snapper()
-    {
-    }
-
-    /**
-     * @fn virtual void Snapper::handleDragEvent(const DragEvent& evt)
-     *
-     * @brief Called when dragging the Snapper.
-     *
-     *        Called when dragging the Snapper. It will delegate the event if a GenericCallback
-     *        is set with setDragAction.
-     *
-     * @param evt The drag event.
-     */
     virtual void handleDragEvent(const DragEvent& evt)
     {
         Draggable<T>::handleDragEvent(evt);
@@ -84,18 +57,14 @@ public:
     }
 
     /**
-     * @fn virtual void Snapper::handleClickEvent(const ClickEvent& evt)
+     * Handles the click events when the Snapper is clicked. It saves its current position
+     * as the snap position if the Snapper is pressed. This happens when the drag operation
+     * starts.
      *
-     * @brief Handles the click events when the Snapper is clicked.
+     * The snapper will then move to the snap position when the click is released. This
+     * happens when the drag operation ends.
      *
-     *         Handles the click events when the Snapper is clicked. It saves its current
-     *         position as the snap position if the Snapper is pressed. This happens when the
-     *         drag operation starts.
-     *
-     *         The snapper will then move to the snap position when the click is released. This
-     *         happens when the drag operation ends.
-     *
-     * @param evt The click event.
+     * @param  evt The click event.
      */
     virtual void handleClickEvent(const ClickEvent& evt)
     {
@@ -108,54 +77,42 @@ public:
                 snappedAction->execute();
             }
 
-            T::moveTo(snapPosition.first, snapPosition.second);
+            T::moveTo(snapPositionX, snapPositionY);
         }
         else if (evt.getType() == ClickEvent::PRESSED)
         {
-            snapPosition.first = T::getX();
-            snapPosition.second = T::getY();
+            snapPositionX = T::getX();
+            snapPositionY = T::getY();
         }
     }
 
     /**
-     * @fn void Snapper::setSnapPosition(int16_t x, int16_t y)
+     * Sets the position the Snapper should snap to. This position will be overridden with
+     * the Snappers current position when the Snapper is pressed.
      *
-     * @brief Sets the position the Snapper should snap to.
-     *
-     *        Sets the position the Snapper should snap to. This position will be overridden
-     *        with the Snappers current position when the Snapper is pressed.
-     *
-     * @param x The x coordinate.
-     * @param y The y coordinate.
+     * @param  x The x coordinate.
+     * @param  y The y coordinate.
      */
     void setSnapPosition(int16_t x, int16_t y)
     {
-        snapPosition.first = x;
-        snapPosition.second = y;
+        snapPositionX = x;
+        snapPositionY = y;
     }
 
     /**
-     * @fn void Snapper::setDragAction(GenericCallback< const DragEvent& >& callback)
+     * Associates an action to be performed when the Snapper is dragged.
      *
-     * @brief Associates an action to be performed when the Snapper is dragged.
-     *
-     *        Associates an action to be performed when the Snapper is dragged.
-     *
-     * @param callback The callback will be executed with the DragEvent.
+     * @param  callback The callback will be executed with the DragEvent.
      *
      * @see GenericCallback
      */
-    void setDragAction(GenericCallback< const DragEvent& >& callback)
+    void setDragAction(GenericCallback<const DragEvent&>& callback)
     {
         dragAction = &callback;
     }
 
     /**
-     * @fn void Snapper::setSnappedAction(GenericCallback<>& callback)
-     *
-     * @brief Associates an action to be performed when the Snapper is snapped.
-     *
-     *        Associates an action to be performed when the Snapper is snapped.
+     * Associates an action to be performed when the Snapper is snapped.
      *
      * @param [in] callback The callback to be executed on snap.
      *
@@ -167,7 +124,8 @@ public:
     }
 
 private:
-    Pair<int16_t, int16_t> snapPosition;
+    int16_t snapPositionX;
+    int16_t snapPositionY;
     GenericCallback<const DragEvent&>* dragAction;
     GenericCallback<>* snappedAction;
 };

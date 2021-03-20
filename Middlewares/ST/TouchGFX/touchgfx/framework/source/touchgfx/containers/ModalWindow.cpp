@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -18,11 +18,10 @@
 
 namespace touchgfx
 {
-ModalWindow::ModalWindow() :
-    Container()
+ModalWindow::ModalWindow()
+    : Container()
 {
-    Container::setWidth(HAL::DISPLAY_WIDTH);
-    Container::setHeight(HAL::DISPLAY_HEIGHT);
+    ModalWindow::setWidthHeight(HAL::DISPLAY_WIDTH, HAL::DISPLAY_HEIGHT);
 
     int defaultShadeAlpha = 96;
     colortype defaultShadeColor = Color::getColorFrom24BitRGB(0x0, 0x0, 0x0);
@@ -35,10 +34,6 @@ ModalWindow::ModalWindow() :
 
     Container::add(windowContainer);
     windowContainer.add(windowBackground);
-}
-
-ModalWindow::~ModalWindow()
-{
 }
 
 void ModalWindow::setBackground(const BitmapId& bmpId)
@@ -93,7 +88,7 @@ void ModalWindow::setShadeColor(colortype color)
     backgroundShade.invalidate();
 }
 
-touchgfx::colortype ModalWindow::getShadeColor() const
+colortype ModalWindow::getShadeColor() const
 {
     return backgroundShade.getColor();
 }
@@ -109,9 +104,4 @@ void ModalWindow::hide()
     setVisible(false);
     invalidate();
 }
-
-bool ModalWindow::isShowing() const
-{
-    return isVisible();
-}
-}
+} // namespace touchgfx

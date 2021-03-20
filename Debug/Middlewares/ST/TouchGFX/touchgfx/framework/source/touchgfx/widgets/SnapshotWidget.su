@@ -33,5 +33,5 @@ SnapshotWidget.cpp:24:1:touchgfx::SnapshotWidget::~SnapshotWidget()	16	static
 SnapshotWidget.cpp:24:1:virtual touchgfx::SnapshotWidget::~SnapshotWidget()	16	static
 SnapshotWidget.cpp:28:6:virtual void touchgfx::SnapshotWidget::draw(const touchgfx::Rect&) const	40	static
 SnapshotWidget.cpp:42:6:virtual touchgfx::Rect touchgfx::SnapshotWidget::getSolidRect() const	32	static
-SnapshotWidget.cpp:59:6:virtual void touchgfx::SnapshotWidget::makeSnapshot()	16	static
-SnapshotWidget.cpp:64:6:virtual void touchgfx::SnapshotWidget::makeSnapshot(touchgfx::BitmapId)	16	static
+SnapshotWidget.cpp:59:6:virtual void touchgfx::SnapshotWidget::makeSnapshot()	24	static
+SnapshotWidget.cpp:64:6:virtual void touchgfx::SnapshotWidget::makeSnapshot(touchgfx::BitmapId)	24	static

@@ -81,7 +81,7 @@ DragEvent.hpp:34:7:constexpr touchgfx::DragEvent::DragEvent(const touchgfx::Drag
 Event.hpp:28:7:constexpr touchgfx::Event& touchgfx::Event::operator=(const touchgfx::Event&)	16	static
 DragEvent.hpp:34:7:constexpr touchgfx::DragEvent& touchgfx::DragEvent::operator=(const touchgfx::DragEvent&)	16	static
 ScrollableContainer.cpp:170:6:virtual void touchgfx::ScrollableContainer::handleDragEvent(const touchgfx::DragEvent&)	144	static
-ScrollableContainer.cpp:313:6:virtual void touchgfx::ScrollableContainer::handleGestureEvent(const touchgfx::GestureEvent&)	56	static
+ScrollableContainer.cpp:313:6:virtual void touchgfx::ScrollableContainer::handleGestureEvent(const touchgfx::GestureEvent&)	64	static
 ScrollableContainer.cpp:352:6:touchgfx::Rect touchgfx::ScrollableContainer::getXScrollbar() const	72	static
 ScrollableContainer.cpp:381:6:touchgfx::Rect touchgfx::ScrollableContainer::getYScrollbar() const	72	static
 ScrollableContainer.cpp:410:6:touchgfx::Rect touchgfx::ScrollableContainer::getXBorder(const touchgfx::Rect&, const touchgfx::Rect&) const	56	static

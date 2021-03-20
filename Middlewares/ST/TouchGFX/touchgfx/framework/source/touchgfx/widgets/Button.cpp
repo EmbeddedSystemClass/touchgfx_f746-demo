@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -14,12 +14,13 @@
   */
 
 #include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/hal/HAL.hpp>
 
 namespace touchgfx
 {
 void Button::draw(const Rect& invalidatedArea) const
 {
-    Bitmap bmp(AbstractButton::pressed ? down : up);
+    Bitmap bmp(pressed ? down : up);
     Rect dirty(0, 0, bmp.getWidth(), bmp.getHeight());
     dirty &= invalidatedArea;
     if ((bmp.getId() != BITMAP_INVALID) && !dirty.isEmpty())
@@ -30,14 +31,13 @@ void Button::draw(const Rect& invalidatedArea) const
     }
 }
 
-void Button::setBitmaps(const Bitmap& bmpReleased, const Bitmap& bmpPressed)
+void Button::setBitmaps(const Bitmap& bitmapReleased, const Bitmap& bitmapPressed)
 {
-    up = bmpReleased;
-    down = bmpPressed;
+    up = bitmapReleased;
+    down = bitmapPressed;
     // Adjust width and height of this widget to match bitmap. It is assumed
     // that the two bitmaps have same dimensions.
-    Drawable::setWidth(down.getWidth());
-    Drawable::setHeight(down.getHeight());
+    Button::setWidthHeight(down);
 }
 
 Rect Button::getSolidRect() const
@@ -47,6 +47,6 @@ Rect Button::getSolidRect() const
         return Rect(0, 0, 0, 0);
     }
 
-    return (AbstractButton::pressed ? down.getSolidRect() : up.getSolidRect());
+    return (pressed ? down.getSolidRect() : up.getSolidRect());
 }
 } // namespace touchgfx

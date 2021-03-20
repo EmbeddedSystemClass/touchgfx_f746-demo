@@ -1,8 +1,8 @@
 Src/STM32F7TouchController.o: ../Src/STM32F7TouchController.cpp \
  ../Src/STM32F7TouchController.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp \
  ../Inc/main.h ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -55,18 +55,18 @@ Src/STM32F7TouchController.o: ../Src/STM32F7TouchController.cpp \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_hcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
- C:/TouchGFXProjects/f746g-disco-test/STM32746G-Discovery/stm32746g_discovery_ts.h \
- C:/TouchGFXProjects/f746g-disco-test/STM32746G-Discovery/stm32746g_discovery.h \
- c:\touchgfxprojects\f746g-disco-test\components\ft5336\ft5336.h \
- c:\touchgfxprojects\f746g-disco-test\components\common\ts.h
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/STM32746G-Discovery/stm32746g_discovery_ts.h \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/STM32746G-Discovery/stm32746g_discovery.h \
+ d:\githubrepos\stm32\touchgfx_f746-demo\components\ft5336\ft5336.h \
+ d:\githubrepos\stm32\touchgfx_f746-demo\components\common\ts.h
 
 ../Src/STM32F7TouchController.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:
 
 ../Inc/main.h:
 
@@ -174,10 +174,10 @@ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
 
-C:/TouchGFXProjects/f746g-disco-test/STM32746G-Discovery/stm32746g_discovery_ts.h:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/STM32746G-Discovery/stm32746g_discovery_ts.h:
 
-C:/TouchGFXProjects/f746g-disco-test/STM32746G-Discovery/stm32746g_discovery.h:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/STM32746G-Discovery/stm32746g_discovery.h:
 
-c:\touchgfxprojects\f746g-disco-test\components\ft5336\ft5336.h:
+d:\githubrepos\stm32\touchgfx_f746-demo\components\ft5336\ft5336.h:
 
-c:\touchgfxprojects\f746g-disco-test\components\common\ts.h:
+d:\githubrepos\stm32\touchgfx_f746-demo\components\common\ts.h:

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,19 +17,15 @@
 
 namespace touchgfx
 {
-DigitalClock::DigitalClock() :
-    AbstractClock(),
-    displayMode(DISPLAY_24_HOUR),
-    useLeadingZeroForHourIndicator(false)
+DigitalClock::DigitalClock()
+    : AbstractClock(),
+      displayMode(DISPLAY_24_HOUR),
+      useLeadingZeroForHourIndicator(false)
 {
     buffer[0] = '\0';
     text.setXY(0, 0);
     text.setWildcard(buffer);
     Container::add(text);
-}
-
-DigitalClock::~DigitalClock()
-{
 }
 
 void DigitalClock::setWidth(int16_t width)
@@ -46,7 +42,10 @@ void DigitalClock::setHeight(int16_t height)
 
 void DigitalClock::setBaselineY(int16_t baselineY)
 {
-    moveTo(getX(), baselineY - text.getTypedText().getFont()->getFontHeight());
+    if (text.getTypedText().hasValidId())
+    {
+        moveTo(getX(), baselineY - text.getTypedText().getFont()->getFontHeight());
+    }
 }
 
 void DigitalClock::displayLeadingZeroForHourIndicator(bool displayLeadingZero)
@@ -54,9 +53,9 @@ void DigitalClock::displayLeadingZeroForHourIndicator(bool displayLeadingZero)
     useLeadingZeroForHourIndicator = displayLeadingZero;
 }
 
-void DigitalClock::setAlpha(uint8_t alpha)
+void DigitalClock::setAlpha(uint8_t newAlpha)
 {
-    text.setAlpha(alpha);
+    text.setAlpha(newAlpha);
 }
 
 uint8_t DigitalClock::getAlpha() const
@@ -76,28 +75,33 @@ void DigitalClock::setColor(colortype color)
     text.invalidate();
 }
 
+colortype DigitalClock::getColor() const
+{
+    return text.getColor();
+}
+
 void DigitalClock::updateClock()
 {
     if (displayMode == DISPLAY_12_HOUR_NO_SECONDS)
     {
         const char* format = useLeadingZeroForHourIndicator ? "%02d:%02d %cM" : "%d:%02d %cM";
-        Unicode::snprintf(buffer, BUFFER_SIZE, format, ((currentHour + 11) % 12) + 1, currentMinute, currentHour < 12 ? 'A' : 'P');
+        Unicode::snprintf(buffer, BUFFER_SIZE, format, getCurrentHour12(), getCurrentMinute(), getCurrentAM() ? 'A' : 'P');
     }
     else if (displayMode == DISPLAY_24_HOUR_NO_SECONDS)
     {
         const char* format = useLeadingZeroForHourIndicator ? "%02d:%02d" : "%d:%02d";
-        Unicode::snprintf(buffer, BUFFER_SIZE, format, currentHour, currentMinute);
+        Unicode::snprintf(buffer, BUFFER_SIZE, format, getCurrentHour24(), getCurrentMinute());
     }
     else if (displayMode == DISPLAY_12_HOUR)
     {
         const char* format = useLeadingZeroForHourIndicator ? "%02d:%02d:%02d %cM" : "%d:%02d:%02d %cM";
-        Unicode::snprintf(buffer, BUFFER_SIZE, format, ((currentHour + 11) % 12) + 1, currentMinute, currentSecond, currentHour < 12 ? 'A' : 'P');
+        Unicode::snprintf(buffer, BUFFER_SIZE, format, getCurrentHour12(), getCurrentMinute(), getCurrentSecond(), getCurrentAM() ? 'A' : 'P');
     }
     else if (displayMode == DISPLAY_24_HOUR)
     {
         const char* format = useLeadingZeroForHourIndicator ? "%02d:%02d:%02d" : "%d:%02d:%02d";
-        Unicode::snprintf(buffer, BUFFER_SIZE, format, currentHour, currentMinute, currentSecond);
+        Unicode::snprintf(buffer, BUFFER_SIZE, format, getCurrentHour24(), getCurrentMinute(), getCurrentSecond());
     }
     text.invalidate();
 }
-}
+} // namespace touchgfx

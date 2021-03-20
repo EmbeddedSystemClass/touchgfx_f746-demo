@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -14,18 +14,15 @@
   */
 
 #include <touchgfx/widgets/Image.hpp>
+#include <touchgfx/hal/HAL.hpp>
 
 namespace touchgfx
 {
-void Image::setBitmap(const Bitmap& bmp)
+void Image::setBitmap(const Bitmap& bitmap)
 {
-    bitmap = bmp;
+    this->bitmap = bitmap;
     // When setting bitmap, adjust size of this widget to match.
-    setWidth(bitmap.getWidth());
-    setHeight(bitmap.getHeight());
-
-    // This bool is no longer used, but maintained for backwards compat.
-    hasTransparentPixels = bitmap.hasTransparentPixels();
+    setWidthHeight(bitmap);
 }
 
 void Image::draw(const Rect& invalidatedArea) const

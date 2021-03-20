@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -13,80 +13,46 @@
   ******************************************************************************
   */
 
-#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 #include <touchgfx/Color.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 
 namespace touchgfx
 {
-PainterRGB565::PainterRGB565(colortype color, uint8_t alpha) :
-    AbstractPainterRGB565()
-{
-    setColor(color, alpha);
-}
-
-void PainterRGB565::setColor(colortype color, uint8_t alpha)
-{
-    painterColor = (uint16_t)color;
-    painterRed = painterColor & RMASK;
-    painterGreen = painterColor & GMASK;
-    painterBlue = painterColor & BMASK;
-    painterAlpha = alpha;
-}
-
-touchgfx::colortype PainterRGB565::getColor() const
-{
-    return painterColor;
-}
-
-void PainterRGB565::setAlpha(uint8_t alpha)
-{
-    painterAlpha = alpha;
-}
-
-uint8_t PainterRGB565::getAlpha() const
-{
-    return painterAlpha;
-}
-
-void PainterRGB565::render(uint8_t* ptr, int x, int xAdjust, int y, unsigned count, const uint8_t* covers)
+void PainterRGB565::render(uint8_t* ptr, int x, int xAdjust, int /*y*/, unsigned count, const uint8_t* covers)
 {
     uint16_t* p = reinterpret_cast<uint16_t*>(ptr) + (x + xAdjust);
-    uint8_t totalAlpha = (widgetAlpha * painterAlpha) / 255u;
-    if (totalAlpha == 255)
+    const uint8_t totalAlpha = LCD::div255(widgetAlpha * painterAlpha);
+    if (totalAlpha == 0xFF)
     {
         do
         {
-            uint32_t alpha = *covers;
-            covers++;
-            if (alpha == 255u)
+            const uint8_t alpha = *covers++;
+            if (alpha == 0xFF)
             {
                 *p = painterColor;
             }
             else
             {
-                *p = mixColors(painterRed, painterGreen, painterBlue, *p, alpha, 8);
+                *p = mixColors(painterRed, painterGreen, painterBlue, *p, alpha);
             }
             p++;
-        }
-        while (--count != 0);
+        } while (--count != 0);
     }
     else
     {
         do
         {
-            uint32_t alpha = (*covers) * totalAlpha;
-            covers++;
-            if (alpha == 255u * 255u)
+            const uint8_t alpha = LCD::div255((*covers++) * totalAlpha);
+            if (alpha == 0xFF)
             {
                 *p = painterColor;
             }
             else
             {
-                *p = mixColors(painterRed, painterGreen, painterBlue, *p, alpha, 16);
+                *p = mixColors(painterRed, painterGreen, painterBlue, *p, alpha);
             }
             p++;
-        }
-        while (--count != 0);
+        } while (--count != 0);
     }
 }
 

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -18,17 +18,13 @@
 
 namespace touchgfx
 {
-AbstractShape::AbstractShape() : CanvasWidget(),
-    dx(0), dy(0), shapeAngle(0),
-    xScale(CWRUtil::toQ5<int>(1)), yScale(CWRUtil::toQ5<int>(1)),
-    minimalRect(Rect())
+AbstractShape::AbstractShape()
+    : CanvasWidget(),
+      dx(0), dy(0), shapeAngle(0),
+      xScale(CWRUtil::toQ10<int>(1)), yScale(CWRUtil::toQ10<int>(1)),
+      minimalRect(Rect())
 {
-    Drawable::setWidth(0);
-    Drawable::setHeight(0);
-}
-
-AbstractShape::~AbstractShape()
-{
+    Drawable::setWidthHeight(0, 0);
 }
 
 bool AbstractShape::drawCanvasWidget(const Rect& invalidatedArea) const

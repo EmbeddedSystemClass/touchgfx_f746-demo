@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,11 +17,11 @@
 
 namespace touchgfx
 {
-AbstractClock::AbstractClock() :
-    Container(),
-    currentHour(0),
-    currentMinute(0),
-    currentSecond(0)
+AbstractClock::AbstractClock()
+    : Container(),
+      currentHour(0),
+      currentMinute(0),
+      currentSecond(0)
 {
 }
 
@@ -44,6 +44,21 @@ uint8_t AbstractClock::getCurrentHour() const
     return currentHour;
 }
 
+uint8_t AbstractClock::getCurrentHour24() const
+{
+    return currentHour;
+}
+
+uint8_t AbstractClock::getCurrentHour12() const
+{
+    return ((currentHour + 11) % 12) + 1;
+}
+
+bool AbstractClock::getCurrentAM() const
+{
+    return currentHour < 12;
+}
+
 uint8_t AbstractClock::getCurrentMinute() const
 {
     return currentMinute;
@@ -53,4 +68,4 @@ uint8_t AbstractClock::getCurrentSecond() const
 {
     return currentSecond;
 }
-}
+} // namespace touchgfx

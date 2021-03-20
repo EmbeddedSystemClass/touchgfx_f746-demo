@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,14 +17,14 @@
 
 namespace touchgfx
 {
-Circle::Circle() : CanvasWidget(),
-    circleCenterX(0), circleCenterY(0), circleRadius(0),
-    circleArcAngleStart(CWRUtil::toQ5<int>(0)), circleArcAngleEnd(CWRUtil::toQ5<int>(360)),
-    circleLineWidth(0), circleArcIncrement(5),
-    circleCapArcIncrement(180)
+Circle::Circle()
+    : CanvasWidget(),
+      circleCenterX(0), circleCenterY(0), circleRadius(0),
+      circleArcAngleStart(CWRUtil::toQ5<int>(0)), circleArcAngleEnd(CWRUtil::toQ5<int>(360)),
+      circleLineWidth(0), circleArcIncrement(5),
+      circleCapArcIncrement(180)
 {
-    Drawable::setWidth(0);
-    Drawable::setHeight(0);
+    Drawable::setWidthHeight(0, 0);
 }
 
 void Circle::setPrecision(int precision)
@@ -123,7 +123,7 @@ bool Circle::drawCanvasWidget(const Rect& invalidatedArea) const
     CWRUtil::Q5 arc = arcStart;
     CWRUtil::Q5 circleArcIncrementQ5 = CWRUtil::toQ5<int>(circleArcIncrement);
     moveToAR2(canvas, arc, (radius * 2) + lineWidth);
-    CWRUtil::Q5 nextArc = CWRUtil::Q5(ROUNDUP(arc + CWRUtil::toQ5<int>(1), circleArcIncrementQ5));
+    CWRUtil::Q5 nextArc = CWRUtil::Q5(ROUNDUP((int)(arc + CWRUtil::toQ5<int>(1)), (int)circleArcIncrementQ5));
     while (nextArc <= arcEnd)
     {
         arc = nextArc;
@@ -215,6 +215,124 @@ Rect Circle::getMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd) const
                 xMax.to<int>() - xMin.to<int>() + 2, yMax.to<int>() - yMin.to<int>() + 2);
 }
 
+void Circle::updateArc(CWRUtil::Q5 setStartAngleQ5, CWRUtil::Q5 setEndAngleQ5)
+{
+    CWRUtil::Q5 startAngleQ5 = setStartAngleQ5;
+    CWRUtil::Q5 endAngleQ5 = setEndAngleQ5;
+    if (circleArcAngleStart == startAngleQ5 && circleArcAngleEnd == endAngleQ5)
+    {
+        return;
+    }
+
+    // Make sure old start < end
+    if (circleArcAngleStart > circleArcAngleEnd)
+    {
+        CWRUtil::Q5 tmp = circleArcAngleStart;
+        circleArcAngleStart = circleArcAngleEnd;
+        circleArcAngleEnd = tmp;
+    }
+    // Make sure new start < end
+    if (startAngleQ5 > endAngleQ5)
+    {
+        CWRUtil::Q5 tmp = startAngleQ5;
+        startAngleQ5 = endAngleQ5;
+        endAngleQ5 = tmp;
+    }
+
+    // Nice constant
+    const CWRUtil::Q5 _360 = CWRUtil::toQ5<int>(360);
+
+    // Get old circle range start in [0..360[
+    if (circleArcAngleStart >= _360)
+    {
+        int x = (circleArcAngleStart / _360).to<int>();
+        circleArcAngleStart = circleArcAngleStart - _360 * x;
+        circleArcAngleEnd = circleArcAngleEnd - _360 * x;
+    }
+    else if (circleArcAngleStart < 0)
+    {
+        int x = 1 + ((-circleArcAngleStart) / _360).to<int>();
+        circleArcAngleStart = circleArcAngleStart + _360 * x;
+        circleArcAngleEnd = circleArcAngleEnd + _360 * x;
+    }
+    // Detect full circle
+    if ((circleArcAngleEnd - circleArcAngleStart) > _360)
+    {
+        circleArcAngleEnd = circleArcAngleStart + _360;
+    }
+
+    // Get new circle range start in [0..360[
+    if (startAngleQ5 >= _360)
+    {
+        int x = (startAngleQ5 / _360).to<int>();
+        startAngleQ5 = startAngleQ5 - _360 * x;
+        endAngleQ5 = endAngleQ5 - _360 * x;
+    }
+    else if (startAngleQ5 < 0)
+    {
+        int x = 1 + (-startAngleQ5 / _360).to<int>();
+        startAngleQ5 = startAngleQ5 + _360 * x;
+        endAngleQ5 = endAngleQ5 + _360 * x;
+    }
+    // Detect full circle
+    if ((endAngleQ5 - startAngleQ5) >= _360)
+    {
+        // Align full new circle with old start.
+        // So old[90..270] -> new[0..360] becomes new[90..450] for smaller invalidated area
+        startAngleQ5 = circleArcAngleStart;
+        endAngleQ5 = startAngleQ5 + _360;
+    }
+    else if ((circleArcAngleEnd - circleArcAngleStart) >= _360)
+    {
+        // New circle is not full, but old is. Align old circle with new.
+        // So old[0..360] -> new[90..270] becomes old[90..450] for smaller invalidated area
+        circleArcAngleStart = startAngleQ5;
+        circleArcAngleEnd = circleArcAngleStart + _360;
+    }
+
+    // New start is after old end. Could be overlap
+    // if old[10..30]->new[350..380] becomes new[-10..20]
+    if (startAngleQ5 > circleArcAngleEnd && endAngleQ5 - _360 >= circleArcAngleStart)
+    {
+        startAngleQ5 = startAngleQ5 - _360;
+        endAngleQ5 = endAngleQ5 - _360;
+    }
+    // Same as above but for old instead of new
+    if (circleArcAngleStart > endAngleQ5 && circleArcAngleEnd - _360 >= startAngleQ5)
+    {
+        circleArcAngleStart = circleArcAngleStart - _360;
+        circleArcAngleEnd = circleArcAngleEnd - _360;
+    }
+
+    Rect r;
+    if (startAngleQ5 > circleArcAngleEnd || endAngleQ5 < circleArcAngleStart)
+    {
+        // Arcs do not overlap. Invalidate both arcs.
+        r = getMinimalRect(circleArcAngleStart, circleArcAngleEnd);
+        invalidateRect(r);
+
+        r = getMinimalRect(startAngleQ5, endAngleQ5);
+        invalidateRect(r);
+    }
+    else
+    {
+        // Arcs overlap. Invalidate both ends.
+        if (circleArcAngleStart != startAngleQ5)
+        {
+            r = getMinimalRectForUpdatedStartAngle(startAngleQ5);
+            invalidateRect(r);
+        }
+        if (circleArcAngleEnd != endAngleQ5)
+        {
+            r = getMinimalRectForUpdatedEndAngle(endAngleQ5);
+            invalidateRect(r);
+        }
+    }
+
+    circleArcAngleStart = setStartAngleQ5;
+    circleArcAngleEnd = setEndAngleQ5;
+}
+
 void Circle::moveToAR2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const
 {
     canvas.moveTo(circleCenterX + ((r2 * CWRUtil::sine(angle)) / 2), circleCenterY - ((r2 * CWRUtil::cosine(angle)) / 2));
@@ -281,7 +399,7 @@ void Circle::calculateMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd, CWRU
     updateMinMaxAR(arcStart, (circleRadius * 2) + circleLineWidth, xMin, xMax, yMin, yMax);
     // Here we have a up to 4 approximation steps on angles divisible by 90
     CWRUtil::Q5 i;
-    for (i = CWRUtil::Q5(ROUNDUP(arcStart + CWRUtil::toQ5<int>(1), _90)); i <= arcEnd; i = i + _90)
+    for (i = CWRUtil::Q5(ROUNDUP((int)(arcStart + CWRUtil::toQ5<int>(1)), (int)_90)); i <= arcEnd; i = i + _90)
     {
         updateMinMaxAR(i, (circleRadius * 2) + circleLineWidth, xMin, xMax, yMin, yMax);
     }
@@ -322,26 +440,26 @@ void Circle::calculateMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd, CWRU
     }
 }
 
-touchgfx::Rect Circle::getMinimalRectForUpdatedStartAngle(CWRUtil::Q5& startAngleQ5)
+Rect Circle::getMinimalRectForUpdatedStartAngle(const CWRUtil::Q5& startAngleQ5) const
 {
     CWRUtil::Q5 minAngle = CWRUtil::Q5(0); // Unused default value
     CWRUtil::Q5 maxAngle = CWRUtil::Q5(0); // Unused default value
+    int circleArcIncrementQ5int = (int)CWRUtil::toQ5<int>(circleArcIncrement);
     if (circleArcAngleStart < circleArcAngleEnd)
     {
         // start is smaller than end
-        CWRUtil::Q5 circleArcIncrementQ5 = CWRUtil::toQ5<int>(circleArcIncrement);
         if (startAngleQ5 < circleArcAngleStart)
         {
             // start moved even lower
             minAngle = startAngleQ5;
-            maxAngle = CWRUtil::Q5(ROUNDUP((int)circleArcAngleStart, (int)circleArcIncrementQ5));
+            maxAngle = CWRUtil::Q5(ROUNDUP((int)circleArcAngleStart, circleArcIncrementQ5int));
             maxAngle = MIN(maxAngle, circleArcAngleEnd); // No need to go higher than end
         }
         else if (startAngleQ5 < circleArcAngleEnd)
         {
             // start moved higher, but not higher than end
             minAngle = circleArcAngleStart;
-            maxAngle = CWRUtil::Q5(ROUNDUP((int)startAngleQ5, (int)circleArcIncrementQ5));
+            maxAngle = CWRUtil::Q5(ROUNDUP((int)startAngleQ5, circleArcIncrementQ5int));
             maxAngle = MIN(maxAngle, circleArcAngleEnd); // No need to go higher than end
         }
         else
@@ -357,14 +475,14 @@ touchgfx::Rect Circle::getMinimalRectForUpdatedStartAngle(CWRUtil::Q5& startAngl
         if (startAngleQ5 > circleArcAngleStart)
         {
             // start moved even higher
-            minAngle = CWRUtil::toQ5<int>(circleArcAngleStart.to<int>() / circleArcIncrement * circleArcIncrement);
+            minAngle = CWRUtil::Q5(ROUNDDOWN((int)circleArcAngleStart, circleArcIncrementQ5int));
             minAngle = MAX(minAngle, circleArcAngleEnd); // No need to go lower then end
             maxAngle = startAngleQ5;
         }
         else if (startAngleQ5 > circleArcAngleEnd)
         {
             // start moved lower, but not lower than end
-            minAngle = CWRUtil::toQ5<int>(startAngleQ5.to<int>() / circleArcIncrement * circleArcIncrement);
+            minAngle = CWRUtil::Q5(ROUNDDOWN((int)startAngleQ5, circleArcIncrementQ5int));
             minAngle = MAX(minAngle, circleArcAngleEnd); // No need to go lower than end
             maxAngle = circleArcAngleStart;
         }
@@ -378,24 +496,25 @@ touchgfx::Rect Circle::getMinimalRectForUpdatedStartAngle(CWRUtil::Q5& startAngl
     return getMinimalRect(minAngle, maxAngle);
 }
 
-touchgfx::Rect Circle::getMinimalRectForUpdatedEndAngle(CWRUtil::Q5& endAngleQ5)
+Rect Circle::getMinimalRectForUpdatedEndAngle(const CWRUtil::Q5& endAngleQ5) const
 {
     CWRUtil::Q5 minAngle = CWRUtil::Q5(0); // Unused default value
     CWRUtil::Q5 maxAngle = CWRUtil::Q5(0); // Unused default value
+    int circleArcIncrementQ5int = (int)CWRUtil::toQ5<int>(circleArcIncrement);
     if (circleArcAngleStart < circleArcAngleEnd)
     {
         // start is smaller than end
         if (endAngleQ5 > circleArcAngleEnd)
         {
             // end moved even higher
-            minAngle = CWRUtil::toQ5<int>(circleArcAngleEnd.to<int>() / circleArcIncrement * circleArcIncrement);
+            minAngle = CWRUtil::Q5(ROUNDDOWN((int)circleArcAngleEnd, circleArcIncrementQ5int));
             minAngle = MAX(minAngle, circleArcAngleStart);
             maxAngle = endAngleQ5;
         }
         else if (endAngleQ5 > circleArcAngleStart)
         {
             // end moved lower, but not past start
-            minAngle = CWRUtil::toQ5<int>(endAngleQ5.to<int>() / circleArcIncrement * circleArcIncrement);
+            minAngle = CWRUtil::Q5(ROUNDDOWN((int)endAngleQ5, circleArcIncrementQ5int));
             minAngle = MAX(minAngle, circleArcAngleStart); // No need to go lower than start
             maxAngle = circleArcAngleEnd;
         }
@@ -409,19 +528,18 @@ touchgfx::Rect Circle::getMinimalRectForUpdatedEndAngle(CWRUtil::Q5& endAngleQ5)
     else
     {
         // start is higher than end
-        CWRUtil::Q5 circleArcIncrementQ5 = CWRUtil::toQ5<int>(circleArcIncrement);
         if (endAngleQ5 < circleArcAngleEnd)
         {
             // end moved even lower
             minAngle = endAngleQ5;
-            maxAngle = CWRUtil::Q5(ROUNDUP((int)circleArcAngleEnd, (int)circleArcIncrementQ5));
+            maxAngle = CWRUtil::Q5(ROUNDUP((int)circleArcAngleEnd, circleArcIncrementQ5int));
             maxAngle = MIN(maxAngle, circleArcAngleStart); // No need to go higher than start
         }
         else if (endAngleQ5 < circleArcAngleStart)
         {
             // end moved higher, but not higher than start
             minAngle = circleArcAngleEnd;
-            maxAngle = CWRUtil::Q5(ROUNDUP((int)endAngleQ5, (int)circleArcIncrementQ5));
+            maxAngle = CWRUtil::Q5(ROUNDUP((int)endAngleQ5, circleArcIncrementQ5int));
             maxAngle = MIN(maxAngle, circleArcAngleStart);
         }
         else

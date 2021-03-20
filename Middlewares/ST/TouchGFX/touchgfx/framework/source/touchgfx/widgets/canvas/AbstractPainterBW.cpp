@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -24,8 +24,6 @@ void AbstractPainterBW::render(uint8_t* ptr,
                                unsigned count,
                                const uint8_t* covers)
 {
-    (void)covers; // Unused
-
     currentX = x + areaOffsetX;
     currentY = y + areaOffsetY;
     x += xAdjust;
@@ -36,27 +34,62 @@ void AbstractPainterBW::render(uint8_t* ptr,
         return;
     }
 
-    do
+    const uint8_t totalAlpha = LCD::div255(widgetAlpha * painterAlpha);
+    if (totalAlpha == 0xFF)
     {
-        uint8_t color;
-        if (renderNext(color))
+        do
         {
-            unsigned pixel = 1 << (7 - (x % 8));
-            if (!color)
+            uint8_t color;
+            if (renderNext(color))
             {
-                *p &= ~pixel;
+                if (*covers >= 0x80)
+                {
+                    unsigned pixel = 1 << (7 - (x % 8));
+                    if (!color)
+                    {
+                        *p &= ~pixel;
+                    }
+                    else
+                    {
+                        *p |= pixel;
+                    }
+                }
             }
-            else
+            if (((++x) % 8) == 0)
             {
-                *p |= pixel;
+                p++;
             }
-        }
-        if (((++x) % 8) == 0)
-        {
-            p++;
-        }
-        currentX++;
+            covers++;
+            currentX++;
+        } while (--count);
     }
-    while (--count);
+    else
+    {
+        do
+        {
+            uint8_t color;
+            if (renderNext(color))
+            {
+                if (totalAlpha * *covers >= 0xFF * 0x80)
+                {
+                    unsigned pixel = 1 << (7 - (x % 8));
+                    if (!color)
+                    {
+                        *p &= ~pixel;
+                    }
+                    else
+                    {
+                        *p |= pixel;
+                    }
+                }
+            }
+            if (((++x) % 8) == 0)
+            {
+                p++;
+            }
+            covers++;
+            currentX++;
+        } while (--count);
+    }
 }
 } // namespace touchgfx

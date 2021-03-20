@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -13,8 +13,8 @@
   ******************************************************************************
   */
 
-#include <touchgfx/widgets/canvas/AbstractPainterRGB565.hpp>
 #include <touchgfx/Color.hpp>
+#include <touchgfx/widgets/canvas/AbstractPainterRGB565.hpp>
 
 namespace touchgfx
 {
@@ -36,36 +36,29 @@ void AbstractPainterRGB565::render(uint8_t* ptr,
             uint8_t red, green, blue, alpha;
             if (renderNext(red, green, blue, alpha))
             {
-                if (widgetAlpha < 255)
-                {
-                    alpha = static_cast<uint8_t>((alpha * widgetAlpha) / 255);
-                }
-                uint32_t combinedAlpha = (*covers) * alpha;
-                covers++;
+                const uint8_t combinedAlpha = LCD::div255((*covers) * LCD::div255(alpha * widgetAlpha));
 
-                if (combinedAlpha == (255u * 255u)) // max alpha=255 on "*covers" and max alpha=255 on "widgetAlpha"
+                if (combinedAlpha == 0xFF) // max alpha=0xFF on "*covers" and max alpha=0xFF on "widgetAlpha"
                 {
                     // Render a solid pixel
                     renderPixel(p, red, green, blue);
                 }
                 else
                 {
-                    uint8_t p_red = (*p & 0xF800) >> 8;
-                    p_red |= p_red >> 5;
-                    uint8_t p_green = (*p & 0x07E0) >> 3;
-                    p_green |= p_green >> 6;
-                    uint8_t p_blue = (*p & 0x001F) << 3;
-                    p_blue |= p_blue >> 5;
+                    const uint8_t ialpha = 0xFF - combinedAlpha;
+                    const uint8_t p_red = (*p & RMASK) >> 8;
+                    const uint8_t p_green = (*p & GMASK) >> 3;
+                    const uint8_t p_blue = (*p & BMASK) << 3;
                     renderPixel(p,
-                                static_cast<uint8_t>((((red - p_red)   * combinedAlpha) + (p_red << 16)) >> 16),
-                                static_cast<uint8_t>((((green - p_green) * combinedAlpha) + (p_green << 16)) >> 16),
-                                static_cast<uint8_t>((((blue - p_blue)  * combinedAlpha) + (p_blue << 16)) >> 16));
+                                LCD::div255(red * combinedAlpha + p_red * ialpha),
+                                LCD::div255(green * combinedAlpha + p_green * ialpha),
+                                LCD::div255(blue * combinedAlpha + p_blue * ialpha));
                 }
             }
+            covers++;
             p++;
             currentX++;
-        }
-        while (--count != 0);
+        } while (--count != 0);
     }
 }
 

@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -17,17 +17,13 @@
 
 namespace touchgfx
 {
-TextProgress::TextProgress() :
-    AbstractProgressIndicator(),
-    textArea(),
-    decimals(0)
+TextProgress::TextProgress()
+    : AbstractProgressIndicator(),
+      textArea(),
+      decimals(0)
 {
     textBuffer[0] = 0;
     progressIndicatorContainer.add(textArea);
-}
-
-TextProgress::~TextProgress()
-{
 }
 
 void TextProgress::setProgressIndicatorPosition(int16_t x, int16_t y, int16_t width, int16_t height)
@@ -42,7 +38,7 @@ void TextProgress::setTypedText(const TypedText& t)
     textArea.setTypedText(t);
 }
 
-touchgfx::TypedText TextProgress::getTypedText() const
+TypedText TextProgress::getTypedText() const
 {
     return textArea.getTypedText();
 }
@@ -52,14 +48,14 @@ void TextProgress::setColor(colortype color)
     textArea.setColor(color);
 }
 
-touchgfx::colortype TextProgress::getColor() const
+colortype TextProgress::getColor() const
 {
     return textArea.getColor();
 }
 
-void TextProgress::setAlpha(uint8_t alpha)
+void TextProgress::setAlpha(uint8_t newAlpha)
 {
-    textArea.setAlpha(alpha);
+    textArea.setAlpha(newAlpha);
 }
 
 uint8_t TextProgress::getAlpha() const
@@ -87,10 +83,11 @@ void TextProgress::setValue(int value)
 void TextProgress::setNumberOfDecimals(uint16_t numberOfDecimals)
 {
     decimals = MIN(2, numberOfDecimals);
+    setValue(getValue());
 }
 
 uint16_t TextProgress::getNumberOfDecimals() const
 {
     return decimals;
 }
-}
+} // namespace touchgfx

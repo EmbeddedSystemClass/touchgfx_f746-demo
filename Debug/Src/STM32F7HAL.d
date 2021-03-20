@@ -1,26 +1,26 @@
 Src/STM32F7HAL.o: ../Src/STM32F7HAL.cpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/OSWrappers.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/lcd/LCD.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/HAL.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/BlitOp.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Gestures.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/ClickEvent.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Event.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/DragEvent.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/GestureEvent.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/UIEventListener.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/DMA.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Atomic.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Unicode.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/button/ButtonController.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/core/MCUInstrumentation.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Font.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TextProvider.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Bitmap.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/OSWrappers.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/lcd/LCD.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/HAL.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/BlitOp.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Gestures.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/ClickEvent.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Event.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/DragEvent.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/GestureEvent.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/UIEventListener.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/DMA.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Atomic.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Unicode.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/button/ButtonController.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/core/MCUInstrumentation.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Font.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TextProvider.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Bitmap.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h \
  ../Drivers/CMSIS/Include/core_cm7.h \
@@ -73,52 +73,52 @@ Src/STM32F7HAL.o: ../Src/STM32F7HAL.cpp \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_hcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
- C:/TouchGFXProjects/f746g-disco-test/Src/STM32F7HAL.hpp \
- C:/TouchGFXProjects/f746g-disco-test/Src/STM32F7DMA.hpp
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Src/STM32F7HAL.hpp \
+ D:/GitHubRepos/STM32/touchgfx_f746-demo/Src/STM32F7DMA.hpp
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/OSWrappers.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/OSWrappers.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Types.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Config.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/lcd/LCD.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/lcd/LCD.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/HAL.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/HAL.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/BlitOp.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/BlitOp.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Gestures.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Gestures.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/ClickEvent.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/ClickEvent.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Event.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Event.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/DragEvent.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/DragEvent.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/GestureEvent.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/events/GestureEvent.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/UIEventListener.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/UIEventListener.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/DMA.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/DMA.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Atomic.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/Atomic.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Unicode.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Unicode.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/touch/TouchController.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/button/ButtonController.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/driver/button/ButtonController.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/core/MCUInstrumentation.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/platform/core/MCUInstrumentation.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Font.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Font.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TextProvider.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/TextProvider.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Bitmap.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/Bitmap.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Middlewares/ST/TouchGFX/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
 
 ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:
 
@@ -224,6 +224,6 @@ C:/TouchGFXProjects/f746g-disco-test/Middlewares/ST/TouchGFX/touchgfx/framework/
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
 
-C:/TouchGFXProjects/f746g-disco-test/Src/STM32F7HAL.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Src/STM32F7HAL.hpp:
 
-C:/TouchGFXProjects/f746g-disco-test/Src/STM32F7DMA.hpp:
+D:/GitHubRepos/STM32/touchgfx_f746-demo/Src/STM32F7DMA.hpp:

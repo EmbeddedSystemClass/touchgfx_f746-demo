@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * This file is part of the TouchGFX 4.10.0 distribution.
+  * This file is part of the TouchGFX 4.16.1 distribution.
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -13,55 +13,58 @@
   ******************************************************************************
   */
 
+/**
+ * @file touchgfx/widgets/canvas/Circle.hpp
+ *
+ * Declares the touchgfx::Circle class.
+ */
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
 
-#include <touchgfx/hal/Types.hpp>
-#include <touchgfx/widgets/Widget.hpp>
 #include <touchgfx/Bitmap.hpp>
+#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
+#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/lcd/LCD.hpp>
-
+#include <touchgfx/widgets/Widget.hpp>
 #include <touchgfx/widgets/canvas/Canvas.hpp>
 #include <touchgfx/widgets/canvas/CanvasWidget.hpp>
-#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 namespace touchgfx
 {
 /**
- * @class Circle Circle.hpp touchgfx/widgets/canvas/Circle.hpp
+ * Simple widget capable of drawing a circle, or part of a circle (an arc). The Circle can be
+ * filled or be drawn as a simple line along the circumference of the circle. Several
+ * parameters of the circle can be changed: Center, radius, line width, line cap, start
+ * angle and end angle.
  *
- * @brief Simple widget capable of drawing a circle.
- *
- *        Simple widget capable of drawing a circle. By tweaking the parameters of the circle,
- *        several parameters of the circle can be changed. Center, radius, line width, line cap
- *        and partial circle arc. This opens for creation of fascinating graphics.
- *
- * @see CanvasWidget
+ * @note Since the underlying CanwasWidgetRenderer only supports straight lines, the circle is
+ *       drawn using many small straight lines segments. The granularity can be adjusted to
+ *       match the requirements - large circles need more line segments, small circles need
+ *       fewer line segments, to look smooth and round.
+ * @note All circle parameters are internally handled as CWRUtil::Q5 which means that floating
+ *       point values are rounded down to a fixed number of binary digits, for example:
+ *       @code
+ *            Circle circle;
+ *            circle.setCircle(1.1f, 1.1f, 0.9); // Will use (35/32, 35/32, 28/32) = (1.09375f, 1.09375f, 0.875f)
+ *            int x, y, r;
+ *            circle.getCenter(&amp;x, &amp;y); // Will return (1, 1)
+ *            circle.getRadius(&amp;r); // Will return 0
+ *       @endcode.
  */
 class Circle : public CanvasWidget
 {
 public:
-
-    /**
-     * @fn Circle::Circle();
-     *
-     * @brief Constructs a new Circle.
-     *
-     *        Constructs a new Circle.
-     */
     Circle();
 
     /**
-     * @fn template <typename T> void Circle::setCircle(const T x, const T y, const T r)
-     *
-     * @brief Sets the center and radius of the Circle.
-     *
-     *        Sets the center and radius of the Circle.
+     * Sets the center and radius of the Circle.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param x The x coordinate of center.
-     * @param y The y coordinate of center.
-     * @param r The radius.
+     * @param  x The x coordinate of center.
+     * @param  y The y coordinate of center.
+     * @param  r The radius.
+     *
+     * @see setCenter, setRadius
      *
      * @note The area containing the Circle is not invalidated.
      */
@@ -73,15 +76,13 @@ public:
     }
 
     /**
-     * @fn void Circle::setCircle(const int16_t x, const int16_t y, const int16_t r)
+     * Sets the center and radius of the Circle.
      *
-     * @brief Sets the center and radius of the Circle.
+     * @param  x The x coordinate of center.
+     * @param  y The y coordinate of center.
+     * @param  r The radius.
      *
-     *        Sets the center and radius of the Circle.
-     *
-     * @param x The x coordinate of center.
-     * @param y The y coordinate of center.
-     * @param r The radius.
+     * @see setCenter, setRadius
      *
      * @note The area containing the Circle is not invalidated.
      */
@@ -91,34 +92,30 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::setCenter(const T x, const T y)
-     *
-     * @brief Sets the center of the Circle.
-     *
-     *        Sets the center of the Circle.
+     * Sets the center of the Circle.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param x The x coordinate of center.
-     * @param y The y coordinate of center.
+     * @param  x The x coordinate of center.
+     * @param  y The y coordinate of center.
+     *
+     * @see setRadius, setCircle, getCenter
      *
      * @note The area containing the Circle is not invalidated.
      */
     template <typename T>
     void setCenter(const T x, const T y)
     {
-        this->circleCenterX = CWRUtil::toQ5<T>(x);
-        this->circleCenterY = CWRUtil::toQ5<T>(y);
+        this->circleCenterX = CWRUtil::toQ5(x);
+        this->circleCenterY = CWRUtil::toQ5(y);
     }
 
     /**
-     * @fn void Circle::setCenter(const int16_t x, const int16_t y)
+     * Sets the center of the Circle.
      *
-     * @brief Sets the center of the Circle.
+     * @param  x The x coordinate of center.
+     * @param  y The y coordinate of center.
      *
-     *        Sets the center of the Circle.
-     *
-     * @param x The x coordinate of center.
-     * @param y The y coordinate of center.
+     * @see setRadius, setCircle, getCenter
      *
      * @note The area containing the Circle is not invalidated.
      */
@@ -128,15 +125,27 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::getCenter(T& x, T& y) const
+     * Sets the center of the circle / arc in the middle of a pixel. Normally the coordinate is
+     * between pixel number x and x+1 horizontally and between pixel y and y+1 vertically. This
+     * function will set the center in the middle of the pixel by adding 0.5 to both x and y.
      *
-     * @brief Gets the center coordinates of the Circle.
-     *
-     *        Gets the center coordinates of the Circle.
+     * @param  x The x coordinate of the center of the circle.
+     * @param  y The y coordinate of the center of the circle.
+     */
+    void setPixelCenter(int x, int y)
+    {
+        int32_t half = (int32_t)CWRUtil::toQ5(1) / 2;
+        setCenter<CWRUtil::Q5>(CWRUtil::Q5((int32_t)CWRUtil::toQ5(x) + half), CWRUtil::Q5((int32_t)CWRUtil::toQ5(y) + half));
+    }
+
+    /**
+     * Gets the center coordinates of the Circle.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [out] x The x coordinate of the center.
-     * @param [out] y The y coordinate of the center.
+     * @param [out] x The x coordinate of the center rounded down to the precision of T.
+     * @param [out] y The y coordinate of the center rounded down to the precision of T.
+     *
+     * @see setCenter
      */
     template <typename T>
     void getCenter(T& x, T& y) const
@@ -146,32 +155,26 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::setRadius(const T r)
-     *
-     * @brief Sets the radius of the Circle.
-     *
-     *        Sets the radius of the Circle.
+     * Sets the radius of the Circle.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param r The radius.
+     * @param  r The radius.
+     *
+     * @see setCircle, setCenter, getRadius
      *
      * @note The area containing the Circle is not invalidated.
      */
     template <typename T>
     void setRadius(const T r)
     {
-        this->circleRadius = CWRUtil::toQ5<T>(r);
+        this->circleRadius = CWRUtil::toQ5(r);
     }
 
     /**
-     * @fn template <typename T> void Circle::getRadius(T& r) const
-     *
-     * @brief Gets the radius of the Circle.
-     *
-     *        Gets the radius of the Circle.
+     * Gets the radius of the Circle.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [out] r The radius.
+     * @param [out] r The radius rounded down to the precision of T.
      */
     template <typename T>
     void getRadius(T& r) const
@@ -180,48 +183,36 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::setArc(const T startAngle, const T endAngle)
-     *
-     * @brief Sets the start and end angles in degrees of the Circle arc.
-     *
-     *        Sets the start and end angles in degrees of the Circle arc. 0 degrees is straight up
-     *        (12 o'clock) and 90 degrees is to the left (3 o'clock). Any positive or negative
-     *        degrees can be used to specify the part of the Circle to draw.
+     * Sets the start and end angles in degrees of the Circle arc. 0 degrees is straight up
+     * (12 o'clock) and 90 degrees is to the left (3 o'clock). Any positive or negative
+     * degrees can be used to specify the part of the Circle to draw.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param startAngle The start degrees.
-     * @param endAngle   The end degrees.
+     * @param  startAngle The start degrees.
+     * @param  endAngle   The end degrees.
+     *
+     * @see getArc, updateArcStart, updateArcEnd, updateArc
      *
      * @note The area containing the Circle is not invalidated.
-     *
-     * @see getArc
-     * @see updateArcStart
-     * @see updateArcEnd
      */
     template <typename T>
     void setArc(const T startAngle, const T endAngle)
     {
-        circleArcAngleStart = CWRUtil::toQ5<T>(startAngle);
-        circleArcAngleEnd = CWRUtil::toQ5<T>(endAngle);
+        circleArcAngleStart = CWRUtil::toQ5(startAngle);
+        circleArcAngleEnd = CWRUtil::toQ5(endAngle);
     }
 
     /**
-     * @fn void Circle::setArc(const int16_t startAngle, const int16_t endAngle)
+     * Sets the start and end angles in degrees of the Circle arc. 0 degrees is straight up
+     * (12 o'clock) and 90 degrees is to the left (3 o'clock). Any positive or negative
+     * degrees can be used to specify the part of the Circle to draw.
      *
-     * @brief Sets the start and end angles in degrees of the Circle arc.
+     * @param  startAngle The start degrees.
+     * @param  endAngle   The end degrees.
      *
-     *        Sets the start and end angles in degrees of the Circle arc. 0 degrees is straight up
-     *        (12 o'clock) and 90 degrees is to the left (3 o'clock). Any positive or negative
-     *        degrees can be used to specify the part of the Circle to draw.
-     *
-     * @param startAngle The start degrees.
-     * @param endAngle   The end degrees.
+     * @see getArc, updateArcStart, updateArcEnd, updateArc
      *
      * @note The area containing the Circle is not invalidated.
-     *
-     * @see getArc
-     * @see updateArcStart
-     * @see updateArcEnd
      */
     void setArc(const int16_t startAngle, const int16_t endAngle)
     {
@@ -229,15 +220,11 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::getArc(T& startAngle, T& endAngle) const
-     *
-     * @brief Gets the start and end angles in degrees for the circle arc.
-     *
-     *        Gets the start and end angles in degrees for the circle arc.
+     * Gets the start and end angles in degrees for the circle arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [out] startAngle The start.
-     * @param [out] endAngle   The end.
+     * @param [out] startAngle The start angle rounded down to the precision of T.
+     * @param [out] endAngle   The end angle rounded down to the precision of T.
      *
      * @see setArc
      */
@@ -249,16 +236,11 @@ public:
     }
 
     /**
-     * @fn int16_t Circle::getArcStart() const
+     * Gets the start angle in degrees for the arc.
      *
-     * @brief Gets the start angle in degrees for the arc.
+     * @return The starting angle for the arc rounded down to an integer.
      *
-     *        Gets the start angle in degrees for the arc.
-     *
-     * @return The starting angle for the arc.
-     *
-     * @see getArc
-     * @see setArc
+     * @see getArc, setArc
      */
     int16_t getArcStart() const
     {
@@ -266,17 +248,12 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::getArcStart(T& angle) const
-     *
-     * @brief Gets the start angle in degrees for the arc.
-     *
-     *        Gets the start angle in degrees for the arc.
+     * Gets the start angle in degrees for the arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [in,out] angle The angle.
+     * @param [out] angle The starting angle rounded down to the precision of T.
      *
-     * @see getArc
-     * @see setArc
+     * @see getArc, setArc
      */
     template <typename T>
     void getArcStart(T& angle) const
@@ -285,18 +262,11 @@ public:
     }
 
     /**
-     * @fn template <typename T> T Circle::getArcEnd() const
+     * Gets the end angle in degrees for the arc.
      *
-     * @brief Gets the end angle in degrees for the arc.
+     * @return The end angle for the arc rounded down to an integer.
      *
-     *        Gets the end angle in degrees for the arc.
-     *
-     * @tparam T Generic type parameter, either int (default) or float.
-     *
-     * @return The finishing angle for the arc.
-     *
-     * @see getArc
-     * @see setArc
+     * @see getArc, setArc
      */
     int16_t getArcEnd() const
     {
@@ -304,14 +274,10 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::getArcEnd(T& angle) const
-     *
-     * @brief Gets the end angle in degrees for the arc.
-     *
-     *        Gets the end angle in degrees for the arc.
+     * Gets the end angle in degrees for the arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [in,out] angle The angle.
+     * @param [out] angle The end angle rounded down to the precision of T.
      */
     template <typename T>
     void getArcEnd(T& angle) const
@@ -320,24 +286,19 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::updateArcStart(const T startAngle)
-     *
-     * @brief Updates the start angle in degrees for this Circle arc.
-     *
-     *        Updates the start angle in degrees for this Circle arc.
+     * Updates the start angle in degrees for this Circle arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param startAngle The start angle in degrees.
+     * @param  startAngle The start angle in degrees.
+     *
+     * @see setArc, updateArcEnd, updateArc
      *
      * @note The area containing the updated Circle arc is invalidated.
-     *
-     * @see setArc
-     * @see updateArcEnd
      */
     template <typename T>
     void updateArcStart(const T startAngle)
     {
-        CWRUtil::Q5 startAngleQ5 = CWRUtil::toQ5<T>(startAngle);
+        CWRUtil::Q5 startAngleQ5 = CWRUtil::toQ5(startAngle);
         if (circleArcAngleStart == startAngleQ5)
         {
             return;
@@ -351,24 +312,19 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::updateArcEnd(const T endAngle)
-     *
-     * @brief Updates the end angle in degrees for this Circle arc.
-     *
-     *        Updates the end angle in degrees for this Circle arc.
+     * Updates the end angle in degrees for this Circle arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param endAngle The end angle in degrees.
+     * @param  endAngle The end angle in degrees.
+     *
+     * @see setArc, updateArcStart, updateArc
      *
      * @note The area containing the updated Circle arc is invalidated.
-     *
-     * @see setArc
-     * @see updateArcStart
      */
     template <typename T>
     void updateArcEnd(const T endAngle)
     {
-        CWRUtil::Q5 endAngleQ5 = CWRUtil::toQ5<T>(endAngle);
+        CWRUtil::Q5 endAngleQ5 = CWRUtil::toQ5(endAngle);
         if (circleArcAngleEnd == endAngleQ5)
         {
             return;
@@ -382,15 +338,29 @@ public:
     }
 
     /**
-     * @fn template <typename T> void Circle::setLineWidth(const T width)
-     *
-     * @brief Sets the line width for this Circle.
-     *
-     *        Sets the line width for this Circle. If the line width is set to zero, the circle
-     *        will be filled.
+     * Updates the start and end angle in degrees for this Circle arc.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param width The width of the line measured in pixels.
+     * @param  startAngle The new start angle in degrees.
+     * @param  endAngle   The new end angle in degrees.
+     *
+     * @see setArc, getArc, updateArcStart, updateArcEnd
+     *
+     * @note The areas containing the updated Circle arcs are invalidated. As little as possible
+     *       will be invalidated for best performance.
+     */
+    template <typename T>
+    void updateArc(const T startAngle, const T endAngle)
+    {
+        updateArc(CWRUtil::toQ5(startAngle), CWRUtil::toQ5(endAngle));
+    }
+
+    /**
+     * Sets the line width for this Circle. If the line width is set to zero, the circle
+     * will be filled.
+     *
+     * @tparam T Generic type parameter, either int or float.
+     * @param  width The width of the line measured in pixels.
      *
      * @note The area containing the Circle is not invalidated.
      * @note if the new line with is smaller than the old width, the circle should be invalidated
@@ -399,18 +369,14 @@ public:
     template <typename T>
     void setLineWidth(const T width)
     {
-        this->circleLineWidth = CWRUtil::toQ5<T>(width);
+        this->circleLineWidth = CWRUtil::toQ5(width);
     }
 
     /**
-     * @fn template <typename T> void Circle::getLineWidth(T& width) const
-     *
-     * @brief Gets line width.
-     *
-     *        Gets line width.
+     * Gets line width.
      *
      * @tparam T Generic type parameter, either int or float.
-     * @param [out] width The width.
+     * @param [out] width The line width rounded down to the precision of T.
      *
      * @see setLineWidth
      */
@@ -421,30 +387,23 @@ public:
     }
 
     /**
-     * @fn void Circle::setPrecision(const int precision);
+     * Sets precision of the Circle drawing function. The number given as precision is the
+     * number of degrees used as step counter when drawing the line fragments around the
+     * circumference of the circle, five being a reasonable value. Higher values results in
+     * less nice circles but faster rendering and possibly sufficient for very small
+     * circles. Large circles might require a precision smaller than five to make the edge
+     * of the circle look nice and smooth.
      *
-     * @brief Sets a precision of the Circle drawing function.
-     *
-     *        Sets a precision of the Circle drawing function. The number given as precision is the
-     *        number of degrees used as step counter when drawing smaller line fragments around the
-     *        circumference of the circle, five being a sensible value. Higher values results in
-     *        less nice circles but faster rendering. Large circles might need a precision smaller
-     *        than five.
-     *
-     * @param precision The precision measured in degrees.
+     * @param  precision The precision measured in degrees.
      *
      * @note The circle is not invalidated.
      */
     void setPrecision(const int precision);
 
     /**
-     * @fn int Circle::getPrecision() const;
-     *
-     * @brief Gets the precision of the circle drawing function.
-     *
-     *        Gets the precision of the circle drawing function. The precision is the
-     *        number of degrees used as step counter when drawing smaller line fragments around the
-     *        circumference of the circle, the default being being 5.
+     * Gets the precision of the circle drawing function. The precision is the number of
+     * degrees used as step counter when drawing smaller line fragments around the
+     * circumference of the circle, the default being 5.
      *
      * @return The precision.
      *
@@ -453,27 +412,21 @@ public:
     int getPrecision() const;
 
     /**
-     * @fn void Circle::setCapPrecision(const int precision);
+     * Sets the precision of the ends of the Circle arc. The precision is given in degrees
+     * where 180 is the default which results in a square ended arc (aka "butt cap"). 90
+     * will draw "an arrow head" and smaller values gives a round cap. Larger values of
+     * precision results in faster rendering of the circle.
      *
-     * @brief Sets the precision of the ends of the Circle arc.
-     *
-     *        Sets a precision of the ends of the Circle arc. The precision is given in degrees
-     *        where 180 is the default which results in a square ended arc (aka "butt cap"). 90
-     *        will draw "an arrow head" and smaller values gives a round cap. Larger values of
-     *        precision results in faster rendering of the circle.
-     *
-     * @param precision The new cap precision.
+     * @param  precision The new cap precision.
      *
      * @note The circle is not invalidated.
+     * @note The cap precision is not used if the circle is filled (if line width is zero) or when
+     *       a full circle is drawn.
      */
     void setCapPrecision(const int precision);
 
     /**
-     * @fn int Circle::getCapPrecision() const;
-     *
-     * @brief Sets the precision of the ends of the Circle arc.
-     *
-     *        Gets the precision of the ends of the Circle arc.
+     * Gets the precision of the ends of the Circle arc.
      *
      * @return The cap precision in degrees.
      *
@@ -481,68 +434,53 @@ public:
      */
     int getCapPrecision() const;
 
-    /**
-     * @fn virtual bool Circle::drawCanvasWidget(const Rect& invalidatedArea) const;
-     *
-     * @brief Draws the Circle.
-     *
-     *        Draws the Circle. This class supports partial drawing, so only the area described by
-     *        the rectangle will be drawn.
-     *
-     * @param invalidatedArea The rectangle to draw, with coordinates relative to this drawable.
-     *
-     * @return true if it succeeds, false if it fails.
-     */
     virtual bool drawCanvasWidget(const Rect& invalidatedArea) const;
 
-    /**
-     * @fn virtual Rect Circle::getMinimalRect() const;
-     *
-     * @brief Gets minimal rectangle for the current shape of the circle.
-     *
-     *        Gets minimal rectangle for the current shape of the circle.
-     *
-     * @return The minimal rectangle.
-     */
     virtual Rect getMinimalRect() const;
 
     /**
-     * @fn Rect Circle::getMinimalRect(int16_t arcStart, int16_t arcEnd) const;
+     * Gets minimal rectangle containing a given circle arc using the set line width.
      *
-     * @brief Gets minimal rectangle containing a given circle arc.
-     *
-     *        Gets minimal rectangle containing a given circle arc.
-     *
-     * @param arcStart The arc start.
-     * @param arcEnd   The arc end.
+     * @param  arcStart The arc start.
+     * @param  arcEnd   The arc end.
      *
      * @return The minimal rectangle.
      */
     Rect getMinimalRect(int16_t arcStart, int16_t arcEnd) const;
 
     /**
-     * @fn Rect Circle::getMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd) const;
+     * Gets minimal rectangle containing a given circle arc using the set line width.
      *
-     * @brief Gets minimal rectangle containing a given circle arc.
-     *
-     *        Gets minimal rectangle containing a given circle arc.
-     *
-     * @param arcStart The arc start.
-     * @param arcEnd   The arc end.
+     * @param  arcStart The arc start.
+     * @param  arcEnd   The arc end.
      *
      * @return The minimal rectangle.
      */
     Rect getMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd) const;
 
+protected:
+    /**
+     * Updates the start and end angle in degrees for this Circle arc.
+     *
+     * @param  setStartAngleQ5 The new start angle in degrees.
+     * @param  setEndAngleQ5   The new end angle in degrees.
+     *
+     * @see setArc, getArc, updateArcStart, updateArcEnd
+     *
+     * @note The areas containing the updated Circle arcs are invalidated. As little as possible
+     *       will be invalidated for best performance.
+     */
+    void updateArc(const CWRUtil::Q5 setStartAngleQ5, const CWRUtil::Q5 setEndAngleQ5);
+
 private:
-    CWRUtil::Q5 circleCenterX;       ///< The circle center x coordinate
-    CWRUtil::Q5 circleCenterY;       ///< The circle center y coordinate
-    CWRUtil::Q5 circleRadius;        ///< The circle radius
-    CWRUtil::Q5 circleArcAngleStart; ///< The circle arc angle start
-    CWRUtil::Q5 circleArcAngleEnd;   ///< The circle arc angle end
-    CWRUtil::Q5 circleLineWidth;     ///< Width of the circle line
-    uint8_t circleArcIncrement;      ///< The circle arc increment
-    uint8_t circleCapArcIncrement;   ///< The circle cap arc increment
+    CWRUtil::Q5 circleCenterX;
+    CWRUtil::Q5 circleCenterY;
+    CWRUtil::Q5 circleRadius;
+    CWRUtil::Q5 circleArcAngleStart;
+    CWRUtil::Q5 circleArcAngleEnd;
+    CWRUtil::Q5 circleLineWidth;
+    uint8_t circleArcIncrement;
+    uint8_t circleCapArcIncrement;
 
     void moveToAR2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const;
     void lineToAR2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const;
@@ -550,9 +488,10 @@ private:
     void updateMinMaxAR(const CWRUtil::Q5& a, const CWRUtil::Q5& r2, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
     void updateMinMaxXY(const CWRUtil::Q5& xNew, const CWRUtil::Q5& yNew, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
     void calculateMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
-    Rect getMinimalRectForUpdatedStartAngle(CWRUtil::Q5& startAngleQ5);
-    Rect getMinimalRectForUpdatedEndAngle(CWRUtil::Q5& endAngleQ5);
+    Rect getMinimalRectForUpdatedStartAngle(const CWRUtil::Q5& startAngleQ5) const;
+    Rect getMinimalRectForUpdatedEndAngle(const CWRUtil::Q5& endAngleQ5) const;
 };
+
 } // namespace touchgfx
 
 #endif // CIRCLE_HPP
